@@ -1,4 +1,4 @@
-package com.springapp.configuration;
+package com.springapp.mvc.appConfiguration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,14 +12,14 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.springapp") // Scans the following packages for classes with @Controller annotations
+@ComponentScan(basePackages = "com.springapp.mvc") // Scans the following packages for classes with @Controller annotations
 public class AppConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler("/resources/**")
-                .addResourceLocations("/resources/");
+                .addResourceLocations("/WEB-INF/resources/");
     }
     @Bean
     public ViewResolver viewResolver() {

@@ -1,4 +1,4 @@
-package com.springapp.configuration;
+package com.springapp.mvc.securityConfiguration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -20,17 +20,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/").permitAll()
-//                .antMatchers("/allusers").access("hasRole('USER') and hasRole('ADMIN')")
-                .antMatchers("/allusers").permitAll()
-                .antMatchers("/allusers/{gender}/**").access("hasRole('ADMIN')")
-                .and()
-                .formLogin()
-                    .loginPage("/login").permitAll()
-                .and()
-                .logout().permitAll()
-                .and()
-                .exceptionHandling().accessDeniedPage("/error");
+        http
+                .authorizeRequests()
+                    .antMatchers("/","/allusers","/login").permitAll()
+//                    .antMatchers("/allusers").access("hasRole('USER') and hasRole('ADMIN')")
+                    .antMatchers("/allusers/{gender}").access("hasRole('ADMIN')")
+                    .and().formLogin().loginPage("/login")
+                .defaultSuccessUrl("/allusers")
+                .failureUrl("/error")
+                .usernameParameter("username").passwordParameter("password")
+                .and().csrf().disable();
+//                .exceptionHandling().accessDeniedPage("/");
+
     }
 }

@@ -46,4 +46,10 @@ public class UserController {
         model.addAttribute("users", userService.getAllByGender(gender));
         return "welcome";
     }
+
+    @RequestMapping(value = "/error" , method = RequestMethod.GET)
+	public String errorConnection(ModelMap model){
+        model.addAttribute("error", "Invalid Details");
+        return "error";
+	}
 }

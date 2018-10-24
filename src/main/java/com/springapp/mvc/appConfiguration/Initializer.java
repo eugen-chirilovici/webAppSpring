@@ -1,4 +1,4 @@
-package com.springapp.configuration;
+package com.springapp.mvc.appConfiguration;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
