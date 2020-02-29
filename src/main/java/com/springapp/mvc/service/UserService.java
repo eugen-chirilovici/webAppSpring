@@ -1,36 +1,32 @@
 package com.springapp.mvc.service;
 
-import com.springapp.mvc.datasource.UsersDatabaseImitation;
-import com.springapp.mvc.model.Genders;
+import com.springapp.mvc.dao.UsersDAO;
+import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
 
     @Autowired
-    private UsersDatabaseImitation usersDatabaseImitation;
-
-    public boolean checkUser(User user) {
-        for(User u: UsersDatabaseImitation.getListOfUsers()) {
-            if (user.equals(u)) return true;
-        }
-        return false;
-    }
-
-    public List<User> getAllByGender(String genders){
-        return UsersDatabaseImitation
-                .getListOfUsers()
-                .stream()
-                .filter(n->n.getGenders().toString().equalsIgnoreCase(genders))
-                .collect(Collectors.toList());
-    }
+    private UsersDAO usersDAO;
 
     public List<User> getAllUsers() {
-        return UsersDatabaseImitation.getListOfUsers();
+        return UsersDAO.getListOfUsers();
+    }
+
+    public User getUserById(Long userId) {
+        return usersDAO.findUserById(userId);
+    }
+
+    public User getUserByCredentials(Credentials userCredentials) {
+        List<User> userByCredentialsId = usersDAO.findUserByCredentialsId(userCredentials.getId());
+        if (!userByCredentialsId.isEmpty() && userByCredentialsId.size() == 1) {
+            return userByCredentialsId.get(0);
+        }
+        return null;
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.springapp.mvc") // Scans the following packages for classes with @Controller annotations
+@ComponentScan(basePackages = "com.springapp.mvc")
 public class AppConfig extends WebMvcConfigurerAdapter {
 
     @Override

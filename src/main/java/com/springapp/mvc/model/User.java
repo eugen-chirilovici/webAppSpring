@@ -1,66 +1,53 @@
 package com.springapp.mvc.model;
 
-import java.util.Objects;
-
 public class User {
-    private String name;
-    private String password;
-    private Genders genders;
+    private Long userId;
+    private String firstName;
+    private String lastName;
+    private Long credentialsId;
 
-    public User(){}
-
-    public User(String name, String password, Genders genders) {
-        this.name = name;
-        this.password = password;
-        this.genders = genders;
+    public User(String firstName, String lastName, Long credentialsId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.credentialsId = credentialsId;
     }
 
-    public Genders getGenders() {
-        return genders;
+    public User(Long userId, String firstName, String lastName, Long credentialsId) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.credentialsId = credentialsId;
     }
 
-    public void setGenders(Genders genders) {
-        this.genders = genders;
+    public Long getUserId() {
+        return userId;
     }
 
-    public String getName() {
-        return name;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getPassword() {
-        return password;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getLastName() {
+        return lastName;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return Objects.equals(name, user.name) &&
-                Objects.equals(password, user.password) &&
-                genders == user.genders;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, password, genders);
+    public Long getCredentialsId() {
+        return credentialsId;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", genders=" + genders +
-                '}';
+    public void setCredentialsId(Long credentialsId) {
+        this.credentialsId = credentialsId;
     }
 }

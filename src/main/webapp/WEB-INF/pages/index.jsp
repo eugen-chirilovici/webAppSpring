@@ -19,19 +19,14 @@
             <h3 align="center" style="color:maroon;">Hi there! Log in, please</h3>
 
             <div class="container" align="left">
-                <label>Username</label>
-                <input type="text" name="name" required="required"/>
+                <label>Login</label>
+                <input type="text" name="login" required="required"/>
 
                 <label>Password</label>
                 <input type="password" name="password" required="required"/>
 
-                <form action="" >
-                    <input type="radio" name="genders" value="MALE"> Male<br>
-                    <input type="radio" name="genders" value="FEMALE"> Female<br>
-                </form>
-
                 <button type="submit">Login</button>
-
+                <a href="/regist">Register</a>
             </div>
         </form:form>
     </div>

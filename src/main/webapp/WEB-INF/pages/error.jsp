@@ -4,7 +4,8 @@
     <title></title>
 </head>
 <body>
-<h1>Ho-ho-ho! Santa knows you were naughty!</h1>
-<div style="width: 100%; height: 100%"><img src="${pageContext.request.contextPath}resources/santa.jpg"></div>
+<%--<h1>Sorry, access denied!!</h1>--%>
+<h1>${errorMessage}</h1>
+<div style="width: 100%; height: 100%"><img src="../resources/block.jpg"></div>
 </body>
 </html>
