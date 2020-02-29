@@ -9,7 +9,7 @@
 
     <properties>
         <spring.version>4.0.6.RELEASE</spring.version>
-        <springsecurity.version>4.0.1.RELEASE</springsecurity.version>
+        <springsecurity.version>5.2.2.RELEASE</springsecurity.version>
     </properties>
 
     <dependencies>
