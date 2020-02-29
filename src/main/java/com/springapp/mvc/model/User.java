@@ -1,66 +1,54 @@
 package com.springapp.mvc.model;
 
-import java.util.Objects;
+import com.springapp.mvc.model.enums.RoleType;
 
 public class User {
-    private String name;
-    private String password;
-    private Genders genders;
+    private Long userId;
+    private String firstName;
+    private String lastName;
+    private RoleType role;
 
-    public User(){}
-
-    public User(String name, String password, Genders genders) {
-        this.name = name;
-        this.password = password;
-        this.genders = genders;
+    public User(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public Genders getGenders() {
-        return genders;
+    public User(Long userId, String firstName, String lastName, RoleType role) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
     }
 
-    public void setGenders(Genders genders) {
-        this.genders = genders;
+    public Long getUserId() {
+        return userId;
     }
 
-    public String getName() {
-        return name;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public RoleType getRole() {
+        return role;
     }
 
-    public String getPassword() {
-        return password;
+    public void setRole(RoleType role) {
+        this.role = role;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getFirstName() {
+        return firstName;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return Objects.equals(name, user.name) &&
-                Objects.equals(password, user.password) &&
-                genders == user.genders;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, password, genders);
+    public String getLastName() {
+        return lastName;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", genders=" + genders +
-                '}';
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

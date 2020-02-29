@@ -13,7 +13,7 @@
 <br>
 <h2>${message}</h2>
 <c:forEach items="${users}" var="user">
-    <p>User Id: ${user.userId} | First Name: ${user.firstName} | Last Name: ${user.lastName} | Role: ${user.role} </p>
+    <p>First Name: ${user.firstName} | Last Name: ${user.lastName} </p>
 </c:forEach>
 
 </body>
