@@ -15,6 +15,5 @@
 <c:forEach items="${users}" var="user">
     <p>First Name: ${user.firstName} | Last Name: ${user.lastName} </p>
 </c:forEach>
-
 </body>
 </html>
