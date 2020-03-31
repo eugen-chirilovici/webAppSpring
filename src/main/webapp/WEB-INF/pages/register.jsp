@@ -24,6 +24,9 @@
                 <label>Last name</label>
                 <input type="text" placeholder="Last name" name="lastName" required>
 
+                <label>Date of birth</label>
+                <input type="text" placeholder="Date of birth" name="dob">
+
                 <label>User name</label>
                 <input type="text" placeholder="User name" name="login" required>
 

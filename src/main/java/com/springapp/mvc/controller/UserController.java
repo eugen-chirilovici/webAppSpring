@@ -70,6 +70,16 @@ public class UserController {
         return "personalCab";
     }
 
+    @RequestMapping(value = "/moreInfo", method = RequestMethod.GET)
+    public String getMorePersonalInformation(Model model) {
+        List<User> listOfUsers = new ArrayList<>();
+        listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
+        model.addAttribute("users", listOfUsers);
+        model.addAttribute("title", "Advanced info");
+        model.addAttribute("message", "More information:");
+        return "moreInfo";
+    }
+
     @RequestMapping(value = "/error", method = RequestMethod.GET)
     public String errorConnection(ModelMap model) {
         model.addAttribute("errorMessage", "Invalid Details");

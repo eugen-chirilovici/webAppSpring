@@ -4,6 +4,7 @@ public class UserRegistDTO {
 
     private String firstName;
     private String lastName;
+    private String dob;
     private String login;
     private String password;
 
@@ -37,5 +38,13 @@ public class UserRegistDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 }

@@ -18,19 +18,19 @@ public class User {
         this.credentialsId = credentialsId;
     }
 
-    public User(Long userId, String firstName, String lastName, Long credentialsId) {
+    public User(Long userId, String firstName, String lastName, Long credentialsId, String dob) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.credentialsId = credentialsId;
+        this.dob = dob;
     }
 
-    public User(String firstName, String lastName, Long credentialsId, String dob, GENDER gender) {
+    public User(String firstName, String lastName, Long credentialsId, String dob) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.credentialsId = credentialsId;
         this.dob = dob;
-        this.gender = gender;
     }
 
     public Long getUserId() {
