@@ -51,6 +51,11 @@ public class UserController {
         return "redirect:/error";
     }
 
+    @RequestMapping(value = "/alldata", method = RequestMethod.GET)
+    public String alldata(Model model){
+        return "allData";
+    }
+
     @RequestMapping(value = "/allusers", method = RequestMethod.GET)
     public String showAllUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
