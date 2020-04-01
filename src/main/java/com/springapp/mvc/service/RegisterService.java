@@ -25,7 +25,8 @@ public class RegisterService {
 
         Long credentialId = credentialsDAO.addCredential(credentials, RoleType.ROLE_USER);
 
-        User user = new User(userRegistDTO.getFirstName(), userRegistDTO.getLastName(), credentialId);
+        User user = new User(userRegistDTO.getFirstName(), userRegistDTO.getLastName(), credentialId, userRegistDTO.getHobby(),
+                userRegistDTO.getMusicPreferences(),userRegistDTO.getAge());
         usersDAO.addUser(user);
     }
 }

@@ -30,6 +30,15 @@
                 <label>Password</label>
                 <input type="password" placeholder="Enter Password" name="password" required>
 
+                <label>Hobby</label>
+                <input type="text" placeholder="Hobby" name="hobby" required>
+
+                <label>Music Preferences</label>
+                <input type="text" placeholder="Music Preferences" name="musicPreferences" required>
+
+                <label>Age</label>
+                <input type="text" placeholder="Age" name="age" required>
+
                     <%--<label>Repeat Password</label>--%>
                     <%--<input type="password" placeholder="Repeat Password" name="psw-repeat" required>--%>
                     <%--<hr>--%>
