@@ -35,6 +35,7 @@ public class UserController {
         return "index";
     }
 
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String submit(@ModelAttribute("credentials") CredentialsDTO credentials) {
 

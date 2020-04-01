@@ -19,6 +19,7 @@ public class CredentialsDAO {
         listOfCredentials.add(new Credentials(id++, "echirilovici", "test", RoleType.ROLE_ADMIN));
         listOfCredentials.add(new Credentials(id++, "cnicuta", "test", RoleType.ROLE_USER));
         listOfCredentials.add(new Credentials(id++, "frosca", "test", RoleType.ROLE_USER));
+        listOfCredentials.add(new Credentials(id++, "denis", "test", RoleType.ROLE_USER));
     }
 
     public Long addCredential(Credentials credentials, RoleType roleType) {

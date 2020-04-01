@@ -1,10 +1,23 @@
 package com.springapp.mvc.model;
 
+import com.springapp.mvc.model.enums.Stream;
+
 public class User {
     private Long userId;
     private String firstName;
     private String lastName;
     private Long credentialsId;
+    private Stream stream;
+    private String hobby;
+
+    public User(Long userId, String firstName, String lastName, Long credentialsId, Stream stream, String hobby) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.credentialsId = credentialsId;
+        this.stream = stream;
+        this.hobby = hobby;
+    }
 
     public User(String firstName, String lastName, Long credentialsId) {
         this.firstName = firstName;
@@ -49,5 +62,21 @@ public class User {
 
     public void setCredentialsId(Long credentialsId) {
         this.credentialsId = credentialsId;
+    }
+
+    public Stream getStream() {
+        return stream;
+    }
+
+    public void setStream(Stream stream) {
+        this.stream = stream;
+    }
+
+    public String getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
     }
 }

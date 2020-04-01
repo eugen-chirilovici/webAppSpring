@@ -1,6 +1,7 @@
 package com.springapp.mvc.dao;
 
 import com.springapp.mvc.model.User;
+import com.springapp.mvc.model.enums.Stream;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -17,6 +18,10 @@ public class UsersDAO {
         listOfUsers.add(new User(id++, "Eugen", "Chirilovici", 0L));
         listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 1L));
         listOfUsers.add(new User(id++, "Filip", "Rosca", 2L));
+        listOfUsers.add(new User(id++, "Filip", "Rosca", 2L));
+        listOfUsers.add(new User(id++,"Denis","Gurduza",3L, Stream.JAVA,"cosmos"));
+        listOfUsers.add(new User(id++,"Leo","L",4L, Stream.DOT_NET,"cars"));
+        listOfUsers.add(new User(id++,"Andrei","I",5L, Stream.DEV_OPS,"swimming"));
     }
 
     public Long addUser(User user) {
