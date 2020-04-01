@@ -16,9 +16,9 @@ public class CredentialsDAO {
     private static long id = 0L;
 
     static {
+        listOfCredentials.add(new Credentials(id++, "echirilovici", "test", RoleType.ROLE_ADMIN));
         listOfCredentials.add(new Credentials(id++, "bqadfa", "test", RoleType.ROLE_USER));
-        /*listOfCredentials.add(new Credentials(id++, "echirilovici", "test", RoleType.ROLE_ADMIN));
-        listOfCredentials.add(new Credentials(id++, "cnicuta", "test", RoleType.ROLE_USER));
+        /*listOfCredentials.add(new Credentials(id++, "cnicuta", "test", RoleType.ROLE_USER));
         listOfCredentials.add(new Credentials(id++, "frosca", "test", RoleType.ROLE_USER));*/
     }
 

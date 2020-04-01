@@ -14,10 +14,10 @@ public class UsersDAO {
     private static List<User> listOfUsers = new ArrayList<>();
 
     static {
-        listOfUsers.add(new User(id++, "Nichita", "Ganja", 0L, "26 oct 1998"));
-        /*listOfUsers.add(new User(id++, "Eugen", "Chirilovici", 0L));
-        listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 1L));
-        listOfUsers.add(new User(id++, "Filip", "Rosca", 2L));*/
+        listOfUsers.add(new User(id++, "Eugen", "Chirilovici", 0L,"15 sept 1997"));
+        listOfUsers.add(new User(id++, "Nichita", "Ganja", 1L, "26 oct 1998"));
+//        listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 1L));
+//        listOfUsers.add(new User(id++, "Filip", "Rosca", 2L));
     }
 
     public Long addUser(User user) {
