@@ -15,6 +15,8 @@
 <c:forEach items="${users}" var="user">
     <p>First Name: ${user.firstName} | Last Name: ${user.lastName} | Stream: ${user.stream} | Hobby: ${user.hobby}</p>
 </c:forEach>
+<br/>
+<a href="/moredetails" >more details</a>
 
 
 
