@@ -3,6 +3,7 @@ package com.springapp.mvc.service;
 import com.springapp.mvc.dao.CredentialsDAO;
 import com.springapp.mvc.dto.CredentialsDTO;
 import com.springapp.mvc.model.Credentials;
+import com.springapp.mvc.model.enums.RoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,10 @@ public class AuthenticationService {
             return userCredentials.get(0);
         }
         return null;
+    }
+
+    public RoleType getRoleTypeByCredId(long credentialId) {
+        return credentialsDAO.getRoleTypeByCredentialsId(credentialId);
     }
 
     public CredentialsDAO getCredentialsDAO() {

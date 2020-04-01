@@ -9,6 +9,8 @@ import com.springapp.mvc.model.enums.RoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+
 @Service
 public class RegisterService {
 
@@ -25,7 +27,7 @@ public class RegisterService {
 
         Long credentialId = credentialsDAO.addCredential(credentials, RoleType.ROLE_USER);
 
-        User user = new User(userRegistDTO.getFirstName(), userRegistDTO.getLastName(), credentialId);
+        User user = new User(userRegistDTO.getFirstName(), userRegistDTO.getLastName(), Date.valueOf(userRegistDTO.getBirthDate()), userRegistDTO.getEmail(), credentialId);
         usersDAO.addUser(user);
     }
 }

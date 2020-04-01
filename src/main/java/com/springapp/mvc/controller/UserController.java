@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -59,6 +58,7 @@ public class UserController {
         return "welcome";
     }
 
+
     @RequestMapping(value = "/personal", method = RequestMethod.GET)
     public String showPersonalData(Model model) {
         List<User> listOfUsers = new ArrayList<>();
@@ -74,5 +74,17 @@ public class UserController {
     public String errorConnection(ModelMap model) {
         model.addAttribute("errorMessage", "Invalid Details");
         return "error";
+    }
+
+    @RequestMapping(value = "/more_details", method = RequestMethod.GET)
+    public String showMoreDetails(Model model){
+        if (authenticationService.getRoleTypeByCredId(loggedUser.getCredentialsId()).equals(RoleType.ROLE_USER)){
+            List<User> listOfUsers = new ArrayList<>();
+            listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
+            model.addAttribute("users", listOfUsers);
+            model.addAttribute("title", "Personal Data");
+            model.addAttribute("message", "More details:");
+            return "moreDetails";
+        } else return "redirect:/error";
     }
 }

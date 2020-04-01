@@ -24,6 +24,12 @@
                 <label>Last name</label>
                 <input type="text" placeholder="Last name" name="lastName" required>
 
+                <label>Date of Birth</label>
+                <input type="text" placeholder="Pattern: yyyy-MM-dd" name="birthDate" required>
+
+                <label>Email</label>
+                <input type="text" placeholder="Email" name="email" required>
+
                 <label>User name</label>
                 <input type="text" placeholder="User name" name="login" required>
 
