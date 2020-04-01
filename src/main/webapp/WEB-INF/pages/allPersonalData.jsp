@@ -11,6 +11,9 @@
     <title>all personal data</title>
 </head>
 <body>
-
+<div>Prenume: ${user.firstName}</div>
+<div>Nume: ${user.lastName}</div>
+<div>Organizatia: ${user.organization}</div>
+<div>Genul: ${user.gender}</div>
 </body>
 </html>

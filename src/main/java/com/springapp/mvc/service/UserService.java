@@ -1,6 +1,7 @@
 package com.springapp.mvc.service;
 
 import com.springapp.mvc.dao.UsersDAO;
+import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,13 @@ public class UserService {
 
     public User getUserById(Long userId) {
         return usersDAO.findUserById(userId);
+    }
+
+    public UserDTO getUserInformationById(Long userId) {
+        User user = usersDAO.findUserById(userId);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUser(user);
+        return userDTO;
     }
 
     public User getUserByCredentials(Credentials userCredentials) {

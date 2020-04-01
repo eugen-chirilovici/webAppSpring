@@ -24,6 +24,12 @@
                 <label>Last name</label>
                 <input type="text" placeholder="Last name" name="lastName" required>
 
+                <label>Organization</label>
+                <input type="text" placeholder="Organization" name="organization" required>
+
+                <label>Gender</label>
+                <input type="text" placeholder="Gender" name="gender" required>
+
                 <label>User name</label>
                 <input type="text" placeholder="User name" name="login" required>
 
