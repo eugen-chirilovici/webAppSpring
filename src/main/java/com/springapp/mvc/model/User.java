@@ -21,6 +21,15 @@ public class User {
         this.credentialsId = credentialsId;
     }
 
+    public User(String firstName, String lastName, int age, String hobby, Long credentialsId) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.hobby = hobby;
+        this.credentialsId = credentialsId;
+    }
+
     public User(Long userId, String firstName, String lastName, int age, String hobby, Long credentialsId) {
         this.userId = userId;
         this.firstName = firstName;

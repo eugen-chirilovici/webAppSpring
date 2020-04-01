@@ -4,6 +4,8 @@ public class UserRegistDTO {
 
     private String firstName;
     private String lastName;
+    private String age;
+    private String hobby;
     private String login;
     private String password;
 
@@ -37,5 +39,21 @@ public class UserRegistDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getAge() {
+        return Integer.parseInt(age);
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
     }
 }

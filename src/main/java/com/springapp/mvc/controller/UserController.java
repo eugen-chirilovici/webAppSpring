@@ -53,6 +53,7 @@ public class UserController {
 
     @RequestMapping(value = "/alldata", method = RequestMethod.GET)
     public String alldata(Model model){
+        model.addAttribute("user", userService.getUserInformationById(loggedUser.getUserId()));
         return "allData";
     }
 

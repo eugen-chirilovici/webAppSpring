@@ -24,6 +24,12 @@
                 <label>Last name</label>
                 <input type="text" placeholder="Last name" name="lastName" required>
 
+                <label>Age</label>
+                <input type="number" placeholder="Age" name="age" required>
+
+                <label>Hobby</label>
+                <input type="text" placeholder="Hobby" name="hobby" required>
+
                 <label>User name</label>
                 <input type="text" placeholder="User name" name="login" required>
 
