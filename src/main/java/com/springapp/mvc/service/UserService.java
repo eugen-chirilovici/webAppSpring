@@ -29,4 +29,8 @@ public class UserService {
         }
         return null;
     }
+
+    public boolean deleteUserById(long userId) {
+        return usersDAO.deleteUserById(userId);
+    }
 }

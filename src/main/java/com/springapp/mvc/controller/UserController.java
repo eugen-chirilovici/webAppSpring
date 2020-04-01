@@ -52,10 +52,12 @@ public class UserController {
 
     @RequestMapping(value = "/allusers", method = RequestMethod.GET)
     public String showAllUsers(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("title", "Admin Panel");
-        model.addAttribute("message", "Here are all our users:");
-        return "welcome";
+        if (authenticationService.getRoleTypeByCredId(loggedUser.getCredentialsId()).equals(RoleType.ROLE_ADMIN)) {
+            model.addAttribute("users", userService.getAllUsers());
+            model.addAttribute("title", "Admin Panel");
+            model.addAttribute("message", "Here are all our users:");
+            return "welcome";
+        } else return "redirect:/error";
     }
 
 
@@ -72,13 +74,13 @@ public class UserController {
 
     @RequestMapping(value = "/error", method = RequestMethod.GET)
     public String errorConnection(ModelMap model) {
-        model.addAttribute("errorMessage", "Invalid Details");
+        model.addAttribute("errorMessage", "Ops...Something went wrong!");
         return "error";
     }
 
     @RequestMapping(value = "/more_details", method = RequestMethod.GET)
-    public String showMoreDetails(Model model){
-        if (authenticationService.getRoleTypeByCredId(loggedUser.getCredentialsId()).equals(RoleType.ROLE_USER)){
+    public String showMoreDetails(Model model) {
+        if (authenticationService.getRoleTypeByCredId(loggedUser.getCredentialsId()).equals(RoleType.ROLE_USER)) {
             List<User> listOfUsers = new ArrayList<>();
             listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
             model.addAttribute("users", listOfUsers);
@@ -86,5 +88,15 @@ public class UserController {
             model.addAttribute("message", "More details:");
             return "moreDetails";
         } else return "redirect:/error";
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String deleteUserById(long userId) {
+        if (loggedUser.getUserId().equals(userId)) {
+            return "redirect:/error";
+        } else if (userService.deleteUserById(userId) && authenticationService.deleteCredentialsById(userId)) {
+            return "redirect:/allusers";
+        }
+        return "redirect:/error";
     }
 }

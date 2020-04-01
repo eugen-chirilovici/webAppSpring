@@ -39,4 +39,8 @@ public class CredentialsDAO {
                 .filter(t -> t.getId() == credentialsId)
                 .findFirst().get().getRole();
     }
+
+    public boolean deleteCredentialsById(long userId){
+        return listOfCredentials.removeIf(credentials -> credentials.getId() == userId);
+    }
 }

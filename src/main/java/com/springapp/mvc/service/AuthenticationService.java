@@ -27,6 +27,10 @@ public class AuthenticationService {
         return credentialsDAO.getRoleTypeByCredentialsId(credentialId);
     }
 
+    public boolean deleteCredentialsById(long userId) {
+        return credentialsDAO.deleteCredentialsById(userId);
+    }
+
     public CredentialsDAO getCredentialsDAO() {
         return credentialsDAO;
     }
