@@ -75,4 +75,8 @@ public class UserController {
         model.addAttribute("errorMessage", "Invalid Details");
         return "error";
     }
+    @RequestMapping(value = "/allpersonaldata", method = RequestMethod.GET)
+    public String allPersonalData(Model model){
+        return "allPersonalData";
+    }
 }
