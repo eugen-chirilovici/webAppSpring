@@ -4,6 +4,7 @@ import com.springapp.mvc.dao.UsersDAO;
 import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
+import com.springapp.mvc.utils.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +21,13 @@ public class UserService {
     }
 
     public User getUserById(Long userId) {
-        return usersDAO.findUserById(userId);
+        User user = usersDAO.findUserById(userId);
+        return user;
     }
 
     public UserDTO getUserInformationById(Long userId) {
         User user = usersDAO.findUserById(userId);
         UserDTO userDTO = new UserDTO();
-        userDTO.setUser(user);
         return userDTO;
     }
 
