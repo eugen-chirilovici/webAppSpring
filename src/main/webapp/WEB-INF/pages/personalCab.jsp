@@ -13,7 +13,7 @@
 <br>
 <h2>${message}</h2>
 <c:forEach items="${users}" var="user">
-    <p>First Name: ${user.firstName} | Last Name: ${user.lastName} | Stream: ${user.stream} | Hobby: ${user.hobby}</p>
+    <p>First Name: ${user.firstName} | Last Name: ${user.lastName}</p>
 </c:forEach>
 <br/>
 <a href="/moredetails" >more details</a>

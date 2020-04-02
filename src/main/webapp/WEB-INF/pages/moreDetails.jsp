@@ -14,7 +14,7 @@
 <body>
 <h2>${message}</h2>
 <c:forEach items="${usersdetails}" var="user">
-    <p>First Name: ${user.firstName} | Last Name: ${user.lastName} | Stream: ${user.stream} | Hobby: ${user.hobby}</p>
+    <p>First Name: ${user.firstName} <br> Last Name: ${user.lastName} <br> Stream: ${user.stream} <br> Hobby: ${user.hobby}</p>
 </c:forEach>
 </body>
 </html>

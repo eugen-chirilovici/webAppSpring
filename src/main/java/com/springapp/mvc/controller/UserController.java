@@ -1,6 +1,7 @@
 package com.springapp.mvc.controller;
 
 import com.springapp.mvc.dto.CredentialsDTO;
+import com.springapp.mvc.dto.UserMoreDetailsDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
@@ -28,6 +29,8 @@ public class UserController {
     private AuthenticationService authenticationService;
 
     private User loggedUser;
+
+    private UserMoreDetailsDTO userMoreDetailsDTO;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
@@ -75,5 +78,14 @@ public class UserController {
     public String errorConnection(ModelMap model) {
         model.addAttribute("errorMessage", "Invalid Details");
         return "error";
+    }
+
+    @RequestMapping(value = "/moredetails", method = RequestMethod.GET)
+    public String moreDetails(Model model) {
+        List<UserMoreDetailsDTO> userMoreDetailsDTOS = new ArrayList<>();
+        userMoreDetailsDTOS.add(userService.getUserInformationByIdDTO(loggedUser.getUserId()));
+        model.addAttribute("usersdetails", userMoreDetailsDTOS);
+        model.addAttribute("message", "More personal data:");
+        return "moreDetails";
     }
 }

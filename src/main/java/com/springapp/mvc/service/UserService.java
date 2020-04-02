@@ -1,6 +1,7 @@
 package com.springapp.mvc.service;
 
 import com.springapp.mvc.dao.UsersDAO;
+import com.springapp.mvc.dto.UserMoreDetailsDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,13 @@ public class UserService {
             return userByCredentialsId.get(0);
         }
         return null;
+    }
+
+
+    public UserMoreDetailsDTO getUserInformationByIdDTO(Long userId) {
+        User user = usersDAO.findUserById(userId);
+        UserMoreDetailsDTO userDTO = new UserMoreDetailsDTO();
+        userDTO.setUserDTO(user);
+        return userDTO;
     }
 }
