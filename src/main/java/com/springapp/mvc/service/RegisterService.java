@@ -18,6 +18,10 @@ public class RegisterService {
     @Autowired
     private UsersDAO usersDAO;
 
+    public Credentials getUserByLogin(String login) {
+        return credentialsDAO.findUserByLogin(login);
+    }
+
     public void addRegisterUser(UserRegistDTO userRegistDTO) {
         Credentials credentials = new Credentials();
         credentials.setLogin(userRegistDTO.getLogin());

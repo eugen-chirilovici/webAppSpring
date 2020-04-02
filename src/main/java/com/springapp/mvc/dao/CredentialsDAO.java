@@ -28,6 +28,15 @@ public class CredentialsDAO {
         return credentialsId;
     }
 
+    public Credentials findUserByLogin(String login)  {
+        Credentials temp = null;
+        for (Credentials c : listOfCredentials) {
+                if (c.getLogin().equals(login))
+                    temp = c;
+        }
+        return temp;
+    }
+
     public List<Credentials> validateUser(CredentialsDTO credentials) {
         return listOfCredentials.stream()
                 .filter(t -> t.getLogin().equals(credentials.getLogin()) &&
