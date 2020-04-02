@@ -2,6 +2,7 @@ package com.springapp.mvc.dao;
 
 import com.springapp.mvc.dto.CredentialsDTO;
 import com.springapp.mvc.model.Credentials;
+import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +20,19 @@ public class CredentialsDAO {
         listOfCredentials.add(new Credentials(id++, "echirilovici", "test", RoleType.ROLE_ADMIN));
         listOfCredentials.add(new Credentials(id++, "cnicuta", "test", RoleType.ROLE_USER));
         listOfCredentials.add(new Credentials(id++, "frosca", "test", RoleType.ROLE_USER));
+    }
+
+    public Credentials findCredentialsById(Long userId) {
+        for (Credentials credentials : listOfCredentials) {
+            if (credentials.getId() == userId) {
+                return credentials;
+            }
+        }
+        return null;
+    }
+
+    public void deleteCredentials(Credentials credentials){
+        listOfCredentials.remove(credentials);
     }
 
     public Long addCredential(Credentials credentials, RoleType roleType) {

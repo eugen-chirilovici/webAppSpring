@@ -15,6 +15,9 @@
 <c:forEach items="${users}" var="user">
     <p>User Id: ${user.userId} | First Name: ${user.firstName} | Last Name: ${user.lastName}</p>
 </c:forEach>
-
+<form:form method="POST" action="deleteuser">
+    <input type="number" placeholder="User ID" name="userId" required>
+    <button type="submit">Delete</button>
+</form:form>
 </body>
 </html>
