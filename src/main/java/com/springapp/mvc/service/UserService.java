@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.springapp.mvc.dto.utils.DtoConverter.convertUserToDto;
+
 @Service
 public class UserService {
 
@@ -34,8 +36,7 @@ public class UserService {
 
     public UserMoreDetailsDTO getUserInformationByIdDTO(Long userId) {
         User user = usersDAO.findUserById(userId);
-        UserMoreDetailsDTO userDTO = new UserMoreDetailsDTO();
-        userDTO.setUserDTO(user);
-        return userDTO;
+        UserMoreDetailsDTO userMoreDetailsDTO = convertUserToDto(user);
+        return userMoreDetailsDTO;
     }
 }

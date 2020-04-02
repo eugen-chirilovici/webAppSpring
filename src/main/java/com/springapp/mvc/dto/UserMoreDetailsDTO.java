@@ -50,11 +50,4 @@ public class UserMoreDetailsDTO {
         this.stream = stream;
     }
 
-    public void setUserDTO(User user) {
-        this.userId = user.getUserId();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.hobby = user.getHobby();
-        this.stream = user.getStream();
-    }
 }
