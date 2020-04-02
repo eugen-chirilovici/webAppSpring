@@ -1,11 +1,13 @@
 package com.springapp.mvc.controller;
 
 import com.springapp.mvc.dto.CredentialsDTO;
+import com.springapp.mvc.dto.DetUserDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
 import com.springapp.mvc.service.AuthenticationService;
 import com.springapp.mvc.service.UserService;
+import com.springapp.mvc.utils.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -74,5 +76,13 @@ public class UserController {
     public String errorConnection(ModelMap model) {
         model.addAttribute("errorMessage", "Invalid Details");
         return "error";
+    }
+
+    @RequestMapping(value = "/details", method = RequestMethod.GET)
+    public String details(Model model){
+        List<DetUserDTO> listOfUsers = new ArrayList<>();
+        listOfUsers.add(AppUtils.convertUserToUserDTO(userService.getUserById(loggedUser.getUserId())));
+        model.addAttribute("users", listOfUsers);
+        return "details";
     }
 }

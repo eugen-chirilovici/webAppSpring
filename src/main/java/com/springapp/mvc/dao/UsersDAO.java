@@ -21,7 +21,7 @@ public class UsersDAO {
 
     public Long addUser(User user) {
         long userId = id++;
-        listOfUsers.add(new User(userId, user.getFirstName(), user.getLastName(), user.getCredentialsId()));
+        listOfUsers.add(new User(userId, user.getFirstName(), user.getLastName(), user.getAge(), user.getGender(), user.getCredentialsId()));
         return userId;
     }
 

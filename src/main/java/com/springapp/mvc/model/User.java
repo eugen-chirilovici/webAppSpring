@@ -4,7 +4,10 @@ public class User {
     private Long userId;
     private String firstName;
     private String lastName;
+    private int age;
+    private String gender;
     private Long credentialsId;
+
 
     public User(String firstName, String lastName, Long credentialsId) {
         this.firstName = firstName;
@@ -16,6 +19,23 @@ public class User {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.credentialsId = credentialsId;
+    }
+
+    public User(Long userId, String firstName, String lastName, int age, String gender, Long credentialsId) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.credentialsId = credentialsId;
+    }
+
+    public User(String firstName, String lastName, int age, String gender, Long credentialId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
         this.credentialsId = credentialsId;
     }
 
@@ -43,6 +63,14 @@ public class User {
         this.lastName = lastName;
     }
 
+    public int getAge() { return age; }
+
+    public void setAge(int age) { this.age = age; }
+
+    public String getGender() { return gender; }
+
+    public void setGender(String gender) { this.gender = gender; }
+
     public Long getCredentialsId() {
         return credentialsId;
     }
@@ -50,4 +78,5 @@ public class User {
     public void setCredentialsId(Long credentialsId) {
         this.credentialsId = credentialsId;
     }
+
 }
