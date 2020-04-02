@@ -72,7 +72,7 @@ public class UserController {
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     public String deleteUser(@ModelAttribute("deleteUserDTO") DeleteUserDTO deleteUserDTO) {
 
-        if(deleteUserDTO.getDeletedUserId() == null)
+        if(deleteUserDTO.getDeletedUserId() < 1 || deleteUserDTO.getDeletedUserId() > userService.getAllUsers().size())
             return "redirect:/error";
         userService.removeUserById(deleteUserDTO);
         return "redirect:/allusers";
