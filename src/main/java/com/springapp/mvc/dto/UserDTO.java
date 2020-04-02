@@ -41,10 +41,5 @@ public class UserDTO {
         this.gender = gender;
     }
 
-    public void setUser(User user) {
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.organization = user.getOrganization();
-        this.gender = user.getGender();
-    }
+
 }
