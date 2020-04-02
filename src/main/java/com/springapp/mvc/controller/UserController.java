@@ -77,6 +77,10 @@ public class UserController {
     }
     @RequestMapping(value = "/allpersonaldata", method = RequestMethod.GET)
     public String allPersonalData(Model model){
+        List<User> listOfUsers = new ArrayList<>();
+        listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
+
+        model.addAttribute("users", listOfUsers);
         return "allPersonalData";
     }
 }

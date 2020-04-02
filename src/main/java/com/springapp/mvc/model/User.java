@@ -6,7 +6,7 @@ public class User {
     private String lastName;
     private Long credentialsId;
 
-    public User(String userRegistDTOFirstName, String name, String firstName, String lastName, Long credentialsId) {
+    public User(String firstName, String lastName, Long credentialsId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.credentialsId = credentialsId;
