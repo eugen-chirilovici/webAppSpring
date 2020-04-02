@@ -1,6 +1,7 @@
 package com.springapp.mvc.service;
 
 import com.springapp.mvc.dao.UsersDAO;
+import com.springapp.mvc.dto.DeleteUserDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,8 @@ public class UserService {
             return userByCredentialsId.get(0);
         }
         return null;
+    }
+    public void removeUserById(DeleteUserDTO deleteUserDTO) {
+        usersDAO.deleteUser(getUserById(deleteUserDTO.getDeletedUserId()));
     }
 }
