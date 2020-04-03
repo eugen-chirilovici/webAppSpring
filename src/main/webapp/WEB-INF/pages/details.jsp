@@ -19,7 +19,7 @@
     <div>First Name: ${user.firstName}</div>>
     <div>Last Name: ${user.lastName} </div>
     <div>Age: ${user.age} </div>
-    <div>Last Name: ${user.gender} </div>
+    <div>Gender: ${user.gender} </div>
 </c:forEach>
 
 </body>

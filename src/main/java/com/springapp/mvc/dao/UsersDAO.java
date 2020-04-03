@@ -14,9 +14,9 @@ public class UsersDAO {
     private static List<User> listOfUsers = new ArrayList<>();
 
     static {
-        listOfUsers.add(new User(id++, "Eugen", "Chirilovici", 0L));
-        listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 1L));
-        listOfUsers.add(new User(id++, "Filip", "Rosca", 2L));
+        listOfUsers.add(new User(id++, "Eugen", "Chirilovici", 26, "Male",  0L));
+        listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 28, "Male",  1L));
+        listOfUsers.add(new User(id++, "Filip", "Rosca", 35, "Male", 2L));
     }
 
     public Long addUser(User user) {
