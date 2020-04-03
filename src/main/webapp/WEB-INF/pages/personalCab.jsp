@@ -15,6 +15,7 @@
 <c:forEach items="${users}" var="user">
     <p>First Name: ${user.firstName} | Last Name: ${user.lastName} </p>
 </c:forEach>
-<a href="/moreDetails">More details </a>
+<p><a href="/moreDetails">More details </a></p>
+<p><a href="/parsedData">Parsed data</a></p>
 </body>
 </html>

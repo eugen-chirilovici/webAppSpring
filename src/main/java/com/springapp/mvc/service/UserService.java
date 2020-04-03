@@ -1,6 +1,8 @@
 package com.springapp.mvc.service;
 
+import com.springapp.mvc.dao.CredentialsDAO;
 import com.springapp.mvc.dao.UsersDAO;
+import com.springapp.mvc.dto.UserDataParser;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +30,16 @@ public class UserService {
             return userByCredentialsId.get(0);
         }
         return null;
+    }
+
+    public void deleteUser(int l) {
+        usersDAO.deleteUsers(l);
+    }
+
+    public UserDataParser getUserByParsedId(Long l) {
+        User user = usersDAO.findUserById(l);
+        UserDataParser userDataParser = new UserDataParser();
+        userDataParser.parser(user);
+        return userDataParser;
     }
 }

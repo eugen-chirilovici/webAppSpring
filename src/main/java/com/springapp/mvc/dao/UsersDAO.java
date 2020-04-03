@@ -15,8 +15,8 @@ public class UsersDAO {
 
     static {
         listOfUsers.add(new User(id++, "Eugen", "Chirilovici", 0L, "Something", "SomeType", 23));
-//        listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 1L));
-//        listOfUsers.add(new User(id++, "Filip", "Rosca", 2L));
+        listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 1L, "Dancing", "Rock", 435));
+        listOfUsers.add(new User(id++, "Filip", "Rosca", 2L, "Some hobby", "Something",34));
     }
 
     public Long addUser(User user) {
@@ -24,6 +24,10 @@ public class UsersDAO {
         listOfUsers.add(new User(userId, user.getFirstName(), user.getLastName(), user.getCredentialsId(), user.getHobby(),
                 user.getMusicPreferences(), user.getAge()));
         return userId;
+    }
+
+    public void deleteUsers(long l) {
+            listOfUsers.remove((int)l);
     }
 
     public User findUserById(Long userId) {

@@ -1,6 +1,7 @@
 package com.springapp.mvc.controller;
 
 import com.springapp.mvc.dto.CredentialsDTO;
+import com.springapp.mvc.dto.DeleteUserDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
@@ -86,5 +87,17 @@ public class UserController {
     public String errorConnection(ModelMap model) {
         model.addAttribute("errorMessage", "Invalid Details");
         return "error";
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String deleteUser(@ModelAttribute("deleteUserDTO")DeleteUserDTO deleteUserDTO) {
+        userService.deleteUser(deleteUserDTO.getRequiredID_Delete());
+        return "redirect:/allusers";
+    }
+
+    @RequestMapping(value = "/parsedData", method = RequestMethod.GET)
+    public  String stringdata(Model model) {
+        model.addAttribute("user", userService.getUserByParsedId(loggedUser.getUserId()));
+        return "parsedData";
     }
 }
