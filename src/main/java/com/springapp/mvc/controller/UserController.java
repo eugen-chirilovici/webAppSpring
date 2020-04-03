@@ -38,8 +38,11 @@ public class UserController {
     public String submit(@ModelAttribute("credentials") CredentialsDTO credentials) {
 
         Credentials userCredentials = authenticationService.confirmAuthentication(credentials);
-        loggedUser = userService.getUserByCredentials(userCredentials);
+        if (userCredentials == null) {
+            return "redirect:/error";
+        }
 
+        loggedUser = userService.getUserByCredentials(userCredentials);
         if (loggedUser != null) {
             if (userCredentials.getRole().equals(RoleType.ROLE_ADMIN)) {
                 return "redirect:/allusers";
