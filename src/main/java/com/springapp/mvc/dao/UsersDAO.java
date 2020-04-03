@@ -1,6 +1,5 @@
 package com.springapp.mvc.dao;
 
-import com.springapp.mvc.dto.UserMoreDetailsDTO;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.Stream;
 import org.springframework.stereotype.Repository;

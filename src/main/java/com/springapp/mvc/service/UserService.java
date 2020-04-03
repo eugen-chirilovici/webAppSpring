@@ -36,7 +36,11 @@ public class UserService {
 
     public UserMoreDetailsDTO getUserInformationByIdDTO(Long userId) {
         User user = usersDAO.findUserById(userId);
-        UserMoreDetailsDTO userMoreDetailsDTO = convertUserToDto(user);
-        return userMoreDetailsDTO;
+        return convertUserToDto(user);
+    }
+
+    public List <User> deletedUserList(User user) {
+        getAllUsers().remove(user);
+        return getAllUsers();
     }
 }

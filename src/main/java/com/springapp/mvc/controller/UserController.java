@@ -88,4 +88,11 @@ public class UserController {
         model.addAttribute("message", "More personal data:");
         return "moreDetails";
     }
+
+    @RequestMapping(value = {"deleteUser/{id}"}, method = RequestMethod.POST)
+    public String deleteUser(@PathVariable("id") long id, Model model) {
+        model.addAttribute("users", userService.deletedUserList(userService.getUserById(id)));
+        return "welcome";
+    }
+
 }
