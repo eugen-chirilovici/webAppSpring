@@ -1,6 +1,7 @@
 package com.springapp.mvc.controller;
 
 import com.springapp.mvc.dto.CredentialsDTO;
+import com.springapp.mvc.dto.DeleteUserDto;
 import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
@@ -84,5 +85,13 @@ public class UserController {
         listOfUsers.add(AppUtils.convertUserToUserDTO(userService.getUserById(loggedUser.getUserId())));
         model.addAttribute("users", listOfUsers);
         return "allPersonalData";
+    }
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    public String deleteUser(@ModelAttribute("deleteUserDto")DeleteUserDto deleteUserDto){
+            int numberOfUsers = userService.getAllUsers().size();
+        if(deleteUserDto.getDeletedUserId() < 1 || deleteUserDto.getDeletedUserId() > numberOfUsers)
+            return "redirect:/error";
+        userService.deleteUserById(deleteUserDto);
+        return "redirect:/allusers";
     }
 }

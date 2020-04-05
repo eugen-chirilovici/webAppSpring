@@ -1,6 +1,7 @@
 package com.springapp.mvc.service;
 
 import com.springapp.mvc.dao.UsersDAO;
+import com.springapp.mvc.dto.DeleteUserDto;
 import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
@@ -37,5 +38,9 @@ public class UserService {
             return userByCredentialsId.get(0);
         }
         return null;
+    }
+
+    public void deleteUserById(DeleteUserDto deleteUserDto){
+        usersDAO.deleteUser(getUserById(deleteUserDto.getDeletedUserId()));
     }
 }

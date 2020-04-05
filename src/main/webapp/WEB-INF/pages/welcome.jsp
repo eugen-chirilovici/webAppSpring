@@ -16,5 +16,11 @@
     <p>User Id: ${user.userId} | First Name: ${user.firstName} | Last Name: ${user.lastName}</p>
 </c:forEach>
 
+<form:form method="post" action="deleteUser">
+    </br><p>Enter the id of the user you want to delete</p>
+    <input type="number" name="deletedUserId" value="Id"></br>
+    <button type="submit" name="deleteUser">Delete</button>
+</form:form>
+
 </body>
 </html>
