@@ -16,7 +16,7 @@ public class AuthenticationService {
 
     public Credentials confirmAuthentication(CredentialsDTO credentials) {
         List<Credentials> userCredentials = credentialsDAO.validateUser(credentials);
-        if (!userCredentials.isEmpty() && userCredentials.size() == 1) {
+        if (userCredentials.size() == 1) {
             return userCredentials.get(0);
         }
         return null;
@@ -28,5 +28,13 @@ public class AuthenticationService {
 
     public void setCredentialsDAO(CredentialsDAO credentialsDAO) {
         this.credentialsDAO = credentialsDAO;
+    }
+
+    public boolean checkRole (long l) {
+        return credentialsDAO.adminValidator(l);
+    }
+
+    public long IDlength() {
+        return CredentialsDAO.getId();
     }
 }

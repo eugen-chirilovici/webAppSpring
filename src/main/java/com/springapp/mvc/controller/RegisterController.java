@@ -24,6 +24,12 @@ public class RegisterController {
 
     @RequestMapping(value = "/regist", method = RequestMethod.POST)
     public String registNewUser(@ModelAttribute("userRegistDTO") UserRegistDTO userRegistDTO){
+        if (userRegistDTO.getAge() < 0 || userRegistDTO.getAge() > 150)
+            return "error";
+        if (registerService.loginValidator(userRegistDTO.getLogin()))
+            return "error";
+        if (userRegistDTO.getPassword().length() < 4)
+            return "error";// less than 4 because automatically created users have the password "test"
         registerService.addRegisterUser(userRegistDTO);
         return "index";
     }

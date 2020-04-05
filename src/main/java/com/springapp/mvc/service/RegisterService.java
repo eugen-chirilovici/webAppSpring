@@ -18,6 +18,10 @@ public class RegisterService {
     @Autowired
     private UsersDAO usersDAO;
 
+    public boolean loginValidator(String input) {
+        return credentialsDAO.validator(input);
+    }
+
     public void addRegisterUser(UserRegistDTO userRegistDTO) {
         Credentials credentials = new Credentials();
         credentials.setLogin(userRegistDTO.getLogin());

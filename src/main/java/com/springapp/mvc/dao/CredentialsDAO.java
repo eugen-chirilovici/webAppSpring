@@ -34,4 +34,22 @@ public class CredentialsDAO {
                 .collect(Collectors.toList());
     }
 
+    public boolean validator(String input) {
+        boolean flag = false;
+        for (Credentials c : listOfCredentials) {
+            if (c.getLogin().equals(input))
+                    flag = true;
+        }
+            return  flag;
+    }
+
+    public boolean adminValidator(long input) {
+        if (listOfCredentials.get((int) input).getRole().equals(RoleType.ROLE_ADMIN))
+            return true;
+        return false;
+    }
+
+    public static long getId() {
+        return id;
+    }
 }

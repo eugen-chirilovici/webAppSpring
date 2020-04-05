@@ -40,7 +40,11 @@ public class UserController {
     public String submit(@ModelAttribute("credentials") CredentialsDTO credentials) {
 
         Credentials userCredentials = authenticationService.confirmAuthentication(credentials);
-        loggedUser = userService.getUserByCredentials(userCredentials);
+        try {
+            loggedUser = userService.getUserByCredentials(userCredentials);
+        } catch (NullPointerException e) {
+            return "redirect:/error";
+        }
 
         if (loggedUser != null) {
             if (userCredentials.getRole().equals(RoleType.ROLE_ADMIN)) {
@@ -49,11 +53,14 @@ public class UserController {
                 return "redirect:/personal";
             }
         }
-        return "redirect:/error";
+
+        return "This return will never work because if \"loggeduser\" is null it throws NPE";
     }
 
     @RequestMapping(value = "/allusers", method = RequestMethod.GET)
     public String showAllUsers(Model model) {
+        if (!(authenticationService.checkRole(loggedUser.getCredentialsId())))
+            return "error";
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("title", "Admin Panel");
         model.addAttribute("message", "Here are all our users:");
@@ -91,6 +98,8 @@ public class UserController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String deleteUser(@ModelAttribute("deleteUserDTO")DeleteUserDTO deleteUserDTO) {
+        if (deleteUserDTO.getRequiredID_Delete() > authenticationService.IDlength())
+            return "error";
         userService.deleteUser(deleteUserDTO.getRequiredID_Delete());
         return "redirect:/allusers";
     }
