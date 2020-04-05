@@ -5,6 +5,7 @@ import com.springapp.mvc.dao.UsersDAO;
 import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
+import com.springapp.mvc.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,11 +46,13 @@ public class UserService {
     public boolean deleteUserById(long id) {
         User user = this.getUserById(id);
         Credentials credentials = credentialsDAO.findCredentialsById(id);
-        if (user != null && credentials != null){
+
+        if(Validation.validUser(user) && !Validation.incorrectCredentials(credentials)){
             usersDAO.deleteUser(user);
             credentialsDAO.deleteCredentials(credentials);
             return true;
         }
+
         return false;
     }
 }

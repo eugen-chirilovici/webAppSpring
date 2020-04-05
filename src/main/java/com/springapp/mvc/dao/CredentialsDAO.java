@@ -31,6 +31,15 @@ public class CredentialsDAO {
         return null;
     }
 
+    public boolean findIfLoginExist(String login) {
+        for (Credentials credentials : listOfCredentials) {
+            if (credentials.getLogin().equals(login)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void deleteCredentials(Credentials credentials){
         listOfCredentials.remove(credentials);
     }

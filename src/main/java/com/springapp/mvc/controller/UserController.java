@@ -7,12 +7,12 @@ import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
 import com.springapp.mvc.service.AuthenticationService;
 import com.springapp.mvc.service.UserService;
+import com.springapp.mvc.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -40,9 +40,14 @@ public class UserController {
     public String submit(@ModelAttribute("credentials") CredentialsDTO credentials) {
 
         Credentials userCredentials = authenticationService.confirmAuthentication(credentials);
+
+        if(Validation.incorrectCredentials(userCredentials)) {
+            return "error";
+        }
+
         loggedUser = userService.getUserByCredentials(userCredentials);
 
-        if (loggedUser != null) {
+        if (Validation.validUser(loggedUser)) {
             if (userCredentials.getRole().equals(RoleType.ROLE_ADMIN)) {
                 return "redirect:/allusers";
             } else if (userCredentials.getRole().equals(RoleType.ROLE_USER)) {
@@ -54,27 +59,35 @@ public class UserController {
 
     @RequestMapping(value = "/alldata", method = RequestMethod.GET)
     public String alldata(Model model){
-        model.addAttribute("user", userService.getUserInformationById(loggedUser.getUserId()));
-        return "allData";
+        if (Validation.validUser(loggedUser)) {
+            model.addAttribute("user", userService.getUserInformationById(loggedUser.getUserId()));
+            return "allData";
+        }
+        return "error";
     }
 
     @RequestMapping(value = "/allusers", method = RequestMethod.GET)
     public String showAllUsers(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("title", "Admin Panel");
-        model.addAttribute("message", "Here are all our users:");
-        return "welcome";
+        if (Validation.validUser(loggedUser)) {
+            model.addAttribute("users", userService.getAllUsers());
+            model.addAttribute("title", "Admin Panel");
+            model.addAttribute("message", "Here are all our users:");
+            return "welcome";
+        }
+        return "error";
     }
 
     @RequestMapping(value = "/personal", method = RequestMethod.GET)
     public String showPersonalData(Model model) {
-        List<User> listOfUsers = new ArrayList<>();
-        listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
-
-        model.addAttribute("users", listOfUsers);
-        model.addAttribute("title", "Personal Cabinet");
-        model.addAttribute("message", "Personal data:");
-        return "personalCab";
+        if (Validation.validUser(loggedUser)) {
+            List<User> listOfUsers = new ArrayList<>();
+            listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
+            model.addAttribute("users", listOfUsers);
+            model.addAttribute("title", "Personal Cabinet");
+            model.addAttribute("message", "Personal data:");
+            return "personalCab";
+        }
+        return "error";
     }
 
     @RequestMapping(value = "/error", method = RequestMethod.GET)
@@ -84,14 +97,18 @@ public class UserController {
     }
 
     @RequestMapping(value = "/deleteuser", method = RequestMethod.POST)
-    public String deleteUserById(@ModelAttribute("userDeleteDTO") UserDeleteDTO userDeleteDTO, Model model){
-        String message = "Error!";
-
-        if(userService.deleteUserById(userDeleteDTO.getUserId())){
-            message = "Success!";
+    public String deleteUserById(@ModelAttribute("userDeleteDTO") UserDeleteDTO userDeleteDTO){
+        if (Validation.validUser(loggedUser)) {
+            if (userService.deleteUserById(userDeleteDTO.getUserId())) {
+                return "redirect:/allusers";
+            }
+            return "error";
         }
+        return "error";
+    }
 
-        model.addAttribute("message", message);
-        return "delete";
+    @RequestMapping(value = "/deleteuser", method = RequestMethod.GET)
+    public String deleteUser(Model model){
+        return "error";
     }
 }

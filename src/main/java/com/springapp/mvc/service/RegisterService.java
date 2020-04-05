@@ -28,4 +28,8 @@ public class RegisterService {
         User user = new User(userRegistDTO.getFirstName(), userRegistDTO.getLastName(), userRegistDTO.getAge(), userRegistDTO.getHobby(), credentialId);
         usersDAO.addUser(user);
     }
+
+    public boolean findIfLoginExist(String login){
+        return credentialsDAO.findIfLoginExist(login);
+    }
 }
