@@ -88,7 +88,7 @@ public class UserController {
     }
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     public String deleteUser(@ModelAttribute("deleteUserDto")DeleteUserDto deleteUserDto){
-            int numberOfUsers = userService.getAllUsers().size();
+            int numberOfUsers = userService.getAllUsers().size() - 1;
         if(deleteUserDto.getDeletedUserId() < 1 || deleteUserDto.getDeletedUserId() > numberOfUsers)
             return "redirect:/error";
         userService.deleteUserById(deleteUserDto);
