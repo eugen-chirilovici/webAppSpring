@@ -28,13 +28,25 @@ public class CredentialsDAO {
         return credentialsId;
     }
 
-    public Credentials findUserByLogin(String login)  {
+    public boolean isUserExist(String login) {
+        boolean flag = false;
+        for (Credentials u : listOfCredentials) {
+            if (u.getLogin().equals(login)) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
+    public String findUserByLogin(String login)  {
         Credentials temp = null;
         for (Credentials c : listOfCredentials) {
                 if (c.getLogin().equals(login))
                     temp = c;
         }
-        return temp;
+        assert temp != null;
+        return temp.getLogin();
     }
 
     public List<Credentials> validateUser(CredentialsDTO credentials) {

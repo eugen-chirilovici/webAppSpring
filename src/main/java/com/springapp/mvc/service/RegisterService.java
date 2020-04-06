@@ -18,8 +18,12 @@ public class RegisterService {
     @Autowired
     private UsersDAO usersDAO;
 
-    public Credentials getUserByLogin(String login) {
+    public String getUserByLogin(String login) {
         return credentialsDAO.findUserByLogin(login);
+    }
+
+    public boolean validateExistingLogin(UserRegistDTO userRegistDTO) {
+        return credentialsDAO.isUserExist(userRegistDTO.getLogin());
     }
 
     public void addRegisterUser(UserRegistDTO userRegistDTO) {

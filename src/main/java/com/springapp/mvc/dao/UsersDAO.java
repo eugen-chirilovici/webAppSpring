@@ -18,8 +18,8 @@ public class UsersDAO {
     static {
         listOfUsers.add(new User(id++, "Eugen", "Chirilovici", 0L,"15 sept 1997"));
         listOfUsers.add(new User(id++, "Nichita", "Ganja", 1L, "26 oct 1998"));
-        listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 1L, "1 jan 1990"));
-        listOfUsers.add(new User(id++, "Filip", "Rosca", 2L, "31 dec 1989"));
+        listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 2L, "1 jan 1990"));
+        listOfUsers.add(new User(id++, "Filip", "Rosca", 3L, "31 dec 1989"));
     }
 
     public Long addUser(User user) {

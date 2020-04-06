@@ -25,9 +25,11 @@ public class RegisterController {
 
     @RequestMapping(value = "/regist", method = RequestMethod.POST)
     public String registNewUser(@ModelAttribute("userRegistDTO") UserRegistDTO userRegistDTO){
-        if (userRegistDTO.getLogin().equals(registerService.getUserByLogin(userRegistDTO.getLogin()).getLogin())) {
+
+        if (registerService.validateExistingLogin(userRegistDTO)) {
             return "loginError";
         }
+
         else {
             registerService.addRegisterUser(userRegistDTO);
             return "index";
