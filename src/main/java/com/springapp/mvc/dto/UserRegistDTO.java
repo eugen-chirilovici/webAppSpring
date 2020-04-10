@@ -53,4 +53,14 @@ public class UserRegistDTO {
     public int getAge() { return age; }
 
     public void setAge(int age) { this.age = age; }
+
+    public UserRegistDTO(String firstName, String lastName, String login, String password, String hobby, String musicPreferences, int age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.login = login;
+        this.password = password;
+        this.hobby = hobby;
+        this.musicPreferences = musicPreferences;
+        this.age = age;
+    }
 }

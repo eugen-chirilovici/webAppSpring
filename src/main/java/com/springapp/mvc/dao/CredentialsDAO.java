@@ -33,9 +33,9 @@ public class CredentialsDAO {
                         t.getPassword().equals(credentials.getPassword()))
                 .collect(Collectors.toList());
     }
-
+    public boolean flag = false;
     public boolean validator(String input) {
-        boolean flag = false;
+        flag = false;
         for (Credentials c : listOfCredentials) {
             if (c.getLogin().equals(input))
                     flag = true;

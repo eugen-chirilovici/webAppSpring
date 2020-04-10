@@ -36,7 +36,7 @@ public class UserService {
         usersDAO.deleteUsers(l);
     }
 
-    public UserDataParser getUserByParsedId(Long l) {
+    public UserDataParser getParsedDataByID(Long l) {
         User user = usersDAO.findUserById(l);
         UserDataParser userDataParser = new UserDataParser();
         userDataParser.parser(user);

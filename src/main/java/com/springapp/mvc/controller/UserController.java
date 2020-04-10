@@ -106,7 +106,7 @@ public class UserController {
 
     @RequestMapping(value = "/parsedData", method = RequestMethod.GET)
     public  String stringdata(Model model) {
-        model.addAttribute("user", userService.getUserByParsedId(loggedUser.getUserId()));
+        model.addAttribute("user", userService.getParsedDataByID(loggedUser.getUserId()));
         return "parsedData";
     }
 }
