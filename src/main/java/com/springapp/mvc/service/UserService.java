@@ -24,7 +24,7 @@ public class UserService {
 
     public User getUserByCredentials(Credentials userCredentials) {
         List<User> userByCredentialsId = usersDAO.findUserByCredentialsId(userCredentials.getId());
-        if (!userByCredentialsId.isEmpty() && userByCredentialsId.size() == 1) {
+        if (userByCredentialsId.size() == 1) {
             return userByCredentialsId.get(0);
         }
         return null;

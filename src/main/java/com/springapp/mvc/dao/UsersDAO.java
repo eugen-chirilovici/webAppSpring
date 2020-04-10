@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Repository
 public class UsersDAO {
 
-    private static long id = 0L;
+    private static Long id = 0L;
     private static List<User> listOfUsers = new ArrayList<>();
 
     static {
@@ -21,9 +21,9 @@ public class UsersDAO {
     }
 
     public Long addUser(User user) {
-        long userId = id++;
-        listOfUsers.add(new User(userId, user.getFirstName(), user.getLastName(), user.getCredentialsId(), user.getBirthDate(), user.getEmail()));
-        return userId;
+        //long userId = id++;
+        listOfUsers.add(new User(user.getUserId(), user.getFirstName(), user.getLastName(), user.getCredentialsId(), user.getBirthDate(), user.getEmail()));
+        return user.getUserId();
     }
 
     public User findUserById(Long userId) {
@@ -43,13 +43,13 @@ public class UsersDAO {
         UsersDAO.listOfUsers = listOfUsers;
     }
 
-    public List<User> findUserByCredentialsId(long credentialsId) {
+    public List<User> findUserByCredentialsId(Long credentialsId) {
             return listOfUsers.stream()
                     .filter(t -> t.getCredentialsId().equals(credentialsId))
                     .collect(Collectors.toList());
     }
 
-    public boolean deleteUserById(long userId){
+    public boolean deleteUserById(Long userId){
         return listOfUsers.removeIf(user -> user.getUserId().equals(userId));
     }
 }

@@ -17,14 +17,14 @@ public class AuthenticationService {
 
     public Credentials confirmAuthentication(CredentialsDTO credentials) {
         List<Credentials> userCredentials = credentialsDAO.validateUser(credentials);
-        if (!userCredentials.isEmpty() && userCredentials.size() == 1) {
+        if (userCredentials.size() == 1) {
             return userCredentials.get(0);
         }
         return null;
     }
 
     public RoleType getRoleTypeByCredId(long credentialId) {
-        return credentialsDAO.getRoleTypeByCredentialsId(credentialId);
+        return credentialsDAO.getCredentialsByCredentialsId(credentialId).getRole();
     }
 
     public boolean deleteCredentialsById(long userId) {

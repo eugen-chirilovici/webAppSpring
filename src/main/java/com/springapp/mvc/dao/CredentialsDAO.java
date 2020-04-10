@@ -22,9 +22,9 @@ public class CredentialsDAO {
     }
 
     public Long addCredential(Credentials credentials, RoleType roleType) {
-        long credentialsId = id++;
-        listOfCredentials.add(new Credentials(credentialsId, credentials.getLogin(), credentials.getPassword(), roleType));
-        return credentialsId;
+        //long credentialsId = id++;
+        listOfCredentials.add(new Credentials(credentials.getId(), credentials.getLogin(), credentials.getPassword(), roleType));
+        return credentials.getId();
     }
 
     public List<Credentials> validateUser(CredentialsDTO credentials) {
@@ -34,10 +34,10 @@ public class CredentialsDAO {
                 .collect(Collectors.toList());
     }
 
-    public RoleType getRoleTypeByCredentialsId(long credentialsId) {
+    public Credentials getCredentialsByCredentialsId(long credentialsId) {
         return listOfCredentials.stream()
                 .filter(t -> t.getId() == credentialsId)
-                .findFirst().get().getRole();
+                .findFirst().orElse(null);
     }
 
     public boolean deleteCredentialsById(long userId){

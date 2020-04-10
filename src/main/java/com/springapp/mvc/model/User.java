@@ -74,4 +74,16 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", credentialsId=" + credentialsId +
+                ", birthDate=" + birthDate +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }
