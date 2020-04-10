@@ -2,6 +2,7 @@ package app.mvc;
 
 import com.springapp.mvc.dao.CredentialsDAO;
 import com.springapp.mvc.dao.UsersDAO;
+import com.springapp.mvc.dto.DeleteUserDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
@@ -18,9 +19,12 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.springapp.mvc.dao.UsersDAO.getListOfUsers;
-import static com.sun.javaws.JnlpxArgs.verify;
+//import static com.sun.javaws.JnlpxArgs.verify;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.when;
 
@@ -36,6 +40,7 @@ public class UserServiceTest {
 
     @Mock
     private CredentialsDAO credentialsDAO;
+
 
     @Test
     public void getAllUserTest() {
@@ -70,6 +75,20 @@ public class UserServiceTest {
         final User actualUser = userService.getUserByCredentials(credentialsForExpectedUser);
 
         assertEquals(expectedUser.get(0), actualUser);
+    }
+
+    @Test
+    public void deleteUserTest() {
+        User user = new User("Eugen", "Chirilovici", 0L,"15 sept 1997");
+        List<User> userL = asList(user);
+        DeleteUserDTO deleteUserDTO = new DeleteUserDTO(0L);
+
+        when(usersDAO.findUserById(0L)).thenReturn(user);
+
+        userService.removeUserById(deleteUserDTO);
+
+        verify(usersDAO, times(1)).findUserById(0L);
+        verify(usersDAO, times(1)).deleteUser(user);
     }
 
 

@@ -15,4 +15,7 @@ public class DeleteUserDTO {
         this.deletedUserId = deletedUserId;
     }
 
+    public DeleteUserDTO(Long deletedUserId) {
+        this.deletedUserId = deletedUserId;
+    }
 }
