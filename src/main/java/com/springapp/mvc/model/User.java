@@ -1,7 +1,9 @@
 package com.springapp.mvc.model;
 
 import com.springapp.mvc.model.enums.Stream;
+import lombok.Builder;
 
+@Builder
 public class User {
     private Long userId;
     private String firstName;
