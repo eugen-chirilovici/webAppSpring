@@ -74,7 +74,7 @@ public class UserControllerTest {
 
     @Test
     public void shouldRedirectToAllUsersAfterDelete() throws Exception{
-        mockMvc.perform(post("/deleteUser/10000"))
+        mockMvc.perform(post("/deleteUser/{id}",1000))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/allusers"))
                 .andExpect(model().attributeExists("users"));
