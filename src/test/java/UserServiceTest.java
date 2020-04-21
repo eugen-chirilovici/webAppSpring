@@ -1,8 +1,8 @@
-package app.mvc;
 
 import com.springapp.mvc.dao.CredentialsDAO;
 import com.springapp.mvc.dao.UsersDAO;
 import com.springapp.mvc.dto.DeleteUserDTO;
+import com.springapp.mvc.exceptionsHandlers.CustomUserException;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
@@ -15,6 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,11 +43,12 @@ public class UserServiceTest {
     private CredentialsDAO credentialsDAO;
 
 
+
     @Test
     public void getAllUserTest() {
         User user = new User("Eugen", "Chirilovici", 0L,"15 sept 1997");
 
-        List<User> userList = asList(user);
+        List<User> userList = Collections.singletonList(user);
         mockStatic(UsersDAO.class);
 
         when(getListOfUsers()).thenReturn(userList);
@@ -54,7 +56,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void getUserByIdTest() {
+    public void getUserByIdTest() throws CustomUserException {
         final User expectedUser = new User("Eugen", "Chirilovici", 0L,"15 sept 1997");
 
         when(usersDAO.findUserById(expectedUser.getUserId())).thenReturn(expectedUser);
@@ -78,17 +80,16 @@ public class UserServiceTest {
     }
 
     @Test
-    public void deleteUserTest() {
+    public void deleteUserTest() throws CustomUserException {
         User user = new User("Eugen", "Chirilovici", 0L,"15 sept 1997");
-        List<User> userL = asList(user);
         DeleteUserDTO deleteUserDTO = new DeleteUserDTO(0L);
 
         when(usersDAO.findUserById(0L)).thenReturn(user);
 
         userService.removeUserById(deleteUserDTO);
 
-        verify(usersDAO, times(1)).findUserById(0L);
-        verify(usersDAO, times(1)).deleteUser(user);
+        verify(usersDAO).findUserById(0L);
+        verify(usersDAO).deleteUser(user);
     }
 
 

@@ -1,11 +1,13 @@
 package com.springapp.mvc.dao;
 
 import com.springapp.mvc.dto.DeleteUserDTO;
+import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -20,6 +22,13 @@ public class UsersDAO {
         listOfUsers.add(new User(id++, "Nichita", "Ganja", 1L, "26 oct 1998"));
         listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 2L, "1 jan 1990"));
         listOfUsers.add(new User(id++, "Filip", "Rosca", 3L, "31 dec 1989"));
+    }
+
+    public void saveUser(UserDTO userDTO) {
+        listOfUsers.add(new User(userDTO.getId(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getDob()));
+    }
+    public void saveUser(User user) {
+        listOfUsers.add(new User(user.getUserId(), user.getFirstName(), user.getLastName(), user.getDob()));
     }
 
     public Long addUser(User user) {
@@ -40,6 +49,7 @@ public class UsersDAO {
         }
         return null;
     }
+
 
     public static List<User> getListOfUsers() {
         return listOfUsers;

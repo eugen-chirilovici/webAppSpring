@@ -12,6 +12,19 @@ public class User {
     private String dob;
     private GENDER gender;
 
+    public User(Long userId, String firstName, String lastName, String dob) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+    }
+
+    public User(String firstName, String lastName, String dob) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+    }
+
     public User(String firstName, String lastName, Long credentialsId) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -79,5 +92,15 @@ public class User {
 
     public void setGender(GENDER gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dob='" + dob + '\'' +
+                '}';
     }
 }

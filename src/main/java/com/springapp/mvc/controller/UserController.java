@@ -2,6 +2,7 @@ package com.springapp.mvc.controller;
 
 import com.springapp.mvc.dto.CredentialsDTO;
 import com.springapp.mvc.dto.DeleteUserDTO;
+import com.springapp.mvc.exceptionsHandlers.CustomUserException;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
@@ -58,7 +59,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/personal", method = RequestMethod.GET)
-    public String showPersonalData(Model model) {
+    public String showPersonalData(Model model) throws CustomUserException {
         List<User> listOfUsers = new ArrayList<>();
         listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
         //String action =
@@ -70,7 +71,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
-    public String deleteUser(@ModelAttribute("deleteUserDTO") DeleteUserDTO deleteUserDTO) {
+    public String deleteUser(@ModelAttribute("deleteUserDTO") DeleteUserDTO deleteUserDTO) throws CustomUserException {
 
         if(deleteUserDTO.getDeletedUserId() < 1 || deleteUserDTO.getDeletedUserId() > userService.getAllUsers().size() - 1)
             return "redirect:/error";
@@ -79,7 +80,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/moreInfo", method = RequestMethod.GET)
-    public String getMorePersonalInformation(Model model) {
+    public String getMorePersonalInformation(Model model) throws CustomUserException {
         List<User> listOfUsers = new ArrayList<>();
         listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
         model.addAttribute("users", listOfUsers);
