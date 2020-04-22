@@ -1,5 +1,6 @@
 package com.springapp.mvc.dao;
 
+import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -50,5 +51,24 @@ public class UsersDAO {
             return listOfUsers.stream()
                     .filter(t -> t.getCredentialsId().equals(credentialsId))
                     .collect(Collectors.toList());
+    }
+
+    public User updateUser(Long id, UserDTO userDTO){
+        for(User user:listOfUsers){
+            if(user.getUserId() == id){
+                if(userDTO.getFirstName() != null)
+                    user.setFirstName(userDTO.getFirstName());
+                if(userDTO.getLastName() != null)
+                    user.setLastName(userDTO.getLastName());
+                if(userDTO.getAge() != null){
+                    user.setAge(Integer.parseInt(userDTO.getAge()));
+                }
+                if(userDTO.getHobby() != null){
+                    user.setHobby(userDTO.getHobby());
+                }
+                return user;
+            }
+        }
+        return null;
     }
 }
