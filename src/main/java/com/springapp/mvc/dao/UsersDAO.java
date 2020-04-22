@@ -1,5 +1,6 @@
 package com.springapp.mvc.dao;
 
+import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +25,11 @@ public class UsersDAO {
         listOfUsers.add(new User(userId, user.getFirstName(), user.getLastName(), user.getCredentialsId(), user.getHobby(),
                 user.getMusicPreferences(), user.getAge()));
         return userId;
+    }
+
+    public void adduser(UserDTO userDTO) {
+        listOfUsers.add(new User(id++, userDTO.getFirstName(), userDTO.getLastName(), userDTO.getHobby(),
+                userDTO.getMusicPreferences(), userDTO.getAge()));
     }
 
     public void deleteUsers(long l) {

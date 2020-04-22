@@ -27,6 +27,16 @@ public class User {
         this.age = age;
     }
 
+
+    public User(Long userId, String firstName, String lastName, String hobby, String musicPreferences, int age) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.hobby = hobby;
+        this.musicPreferences = musicPreferences;
+        this.age = age;
+    }
+
     public Long getUserId() {
         return userId;
     }
