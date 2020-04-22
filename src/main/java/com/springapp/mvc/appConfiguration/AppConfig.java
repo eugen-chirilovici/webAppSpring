@@ -12,20 +12,20 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.springapp.mvc")
+@ComponentScan//(basePackages = "com.springapp.mvc")
 public class AppConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
-                .addResourceHandler("/resources/**")
-                .addResourceLocations("/WEB-INF/resources/");
+                .addResourceHandler("/src/main/webapp/WEB-INF/resources/**")
+                .addResourceLocations("src/main/webapp/WEB-INF/resources/");
     }
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/pages/");
+        viewResolver.setPrefix("src/main/webapp/WEB-INF/pages/");
         viewResolver.setSuffix(".jsp");
         viewResolver.setExposeContextBeansAsAttributes(true);
         return viewResolver;
