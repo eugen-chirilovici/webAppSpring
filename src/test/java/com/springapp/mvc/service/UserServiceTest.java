@@ -53,7 +53,6 @@ public class UserServiceTest {
 
         when(getListOfUsers()).thenReturn(userList);
         assertEquals(userList, userService.getAllUsers());
-
     }
 
     @Test
