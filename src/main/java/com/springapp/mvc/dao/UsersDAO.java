@@ -1,5 +1,6 @@
 package com.springapp.mvc.dao;
 
+import com.springapp.mvc.dto.DetUserDTO;
 import com.springapp.mvc.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +20,14 @@ public class UsersDAO {
         listOfUsers.add(new User(id++, "Filip", "Rosca", 35, "Male", 2L));
     }
 
+    public void save(DetUserDTO detUserDTO){
+        listOfUsers.add(new User(detUserDTO.getFirstName(), detUserDTO.getLastName()));
+    }
+
+    public void save(User user){
+        listOfUsers.add(new User(user.getFirstName(), user.getLastName()));
+    }
+
     public Long addUser(User user) {
         long userId = id++;
         listOfUsers.add(new User(userId, user.getFirstName(), user.getLastName(), user.getAge(), user.getGender(), user.getCredentialsId()));
@@ -32,6 +41,10 @@ public class UsersDAO {
             }
         }
         return null;
+    }
+
+    public void deleteUser(User user){
+        listOfUsers.remove(findUserById(user.getUserId()));
     }
 
     public static List<User> getListOfUsers() {

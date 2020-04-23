@@ -39,6 +39,11 @@ public class User {
         this.credentialsId = credentialsId;
     }
 
+    public User(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public Long getUserId() {
         return userId;
     }
