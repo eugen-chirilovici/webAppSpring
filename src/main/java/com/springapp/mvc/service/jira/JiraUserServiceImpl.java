@@ -25,10 +25,10 @@ public class JiraUserServiceImpl implements JiraUserService {
 
     SessionValue sessionValue = new SessionValue();
 
-    @Value("YourLogin")
+    @Value("nganja")
     private String username;
 
-    @Value("YourPassword")
+    @Value("zJLulz__26!")
     private String password;
 
 

@@ -12,5 +12,4 @@ public final class URLS {
     public static final String UPDATE_ISSUE_BY_ID = "https://uatjira.endava.com/rest/api/2/issue/";
 
 
-
 }
