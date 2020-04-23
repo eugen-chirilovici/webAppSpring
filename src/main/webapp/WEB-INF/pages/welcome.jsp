@@ -20,6 +20,7 @@
             User Id: ${user.userId} | First Name: ${user.firstName} | Last Name: ${user.lastName} | Stream:  ${user.stream}</p>
     </form:form>
 </c:forEach>
+<a href="/logout" >logOut</a>
 
 </body>
 </html>

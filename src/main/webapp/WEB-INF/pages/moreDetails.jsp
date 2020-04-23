@@ -16,5 +16,7 @@
 <c:forEach items="${usersdetails}" var="user">
     <p>First Name: ${user.firstName} <br> Last Name: ${user.lastName} <br> Stream: ${user.stream} <br> Hobby: ${user.hobby}</p>
 </c:forEach>
+
+<a href="/logout" >logOut</a>
 </body>
 </html>

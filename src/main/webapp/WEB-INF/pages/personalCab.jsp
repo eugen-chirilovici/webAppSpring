@@ -17,6 +17,7 @@
 </c:forEach>
 <br/>
 <a href="/moredetails" >more details</a>
+<a href="/logout" >logOut</a>
 
 
 
