@@ -1,14 +1,13 @@
 package com.springapp.mvc.controller;
 
-import com.springapp.mvc.dto.CredentialsDTO;
+import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.dto.UserDeleteDTO;
-import com.springapp.mvc.model.Credentials;
-import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
-import com.springapp.mvc.service.AuthenticationService;
 import com.springapp.mvc.service.UserService;
-import com.springapp.mvc.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -25,10 +25,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private AuthenticationService authenticationService;
-
-    private User loggedUser;
+    private org.springframework.security.core.userdetails.User loggedUser;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
@@ -36,58 +33,54 @@ public class UserController {
         return "index";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String submit(@ModelAttribute("credentials") CredentialsDTO credentials) {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String printLogin(ModelMap model) {
+        model.addAttribute("message", "Hi there! Please, log in if you want to access our page");
+        return "index";
+    }
 
-        Credentials userCredentials = authenticationService.confirmAuthentication(credentials);
+    @RequestMapping(value = "/welcome")
+    public String submit() {
+        loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if(Validation.incorrectCredentials(userCredentials)) {
-            return "error";
-        }
 
-        loggedUser = userService.getUserByCredentials(userCredentials);
-
-        if (Validation.validUser(loggedUser)) {
-            if (userCredentials.getRole().equals(RoleType.ROLE_ADMIN)) {
+        if (loggedUser != null) {
+            if (loggedUser.getAuthorities().contains(new SimpleGrantedAuthority(RoleType.ROLE_ADMIN.getValue()))) {
                 return "redirect:/allusers";
-            } else if (userCredentials.getRole().equals(RoleType.ROLE_USER)) {
+            } else if (loggedUser.getAuthorities().contains(new SimpleGrantedAuthority(RoleType.ROLE_USER.getValue()))) {
                 return "redirect:/personal";
             }
         }
         return "redirect:/error";
     }
 
-    @RequestMapping(value = "/alldata", method = RequestMethod.GET)
-    public String alldata(Model model){
-        if (Validation.validUser(loggedUser)) {
-            model.addAttribute("user", userService.getUserInformationById(loggedUser.getUserId()));
-            return "allData";
-        }
-        return "error";
-    }
-
     @RequestMapping(value = "/allusers", method = RequestMethod.GET)
     public String showAllUsers(Model model) {
-        if (Validation.validUser(loggedUser)) {
-            model.addAttribute("users", userService.getAllUsers());
-            model.addAttribute("title", "Admin Panel");
-            model.addAttribute("message", "Here are all our users:");
-            return "welcome";
-        }
-        return "error";
+        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("title", "Admin Panel");
+        model.addAttribute("message", "Here are all our users:");
+        return "welcome";
     }
 
     @RequestMapping(value = "/personal", method = RequestMethod.GET)
     public String showPersonalData(Model model) {
-        if (Validation.validUser(loggedUser)) {
-            List<User> listOfUsers = new ArrayList<>();
-            listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
-            model.addAttribute("users", listOfUsers);
-            model.addAttribute("title", "Personal Cabinet");
-            model.addAttribute("message", "Personal data:");
-            return "personalCab";
-        }
-        return "error";
+        List<UserDTO> listOfUsers = new ArrayList<>();
+        UserDTO userDTO = new UserDTO();
+        com.springapp.mvc.model.User user = userService.getUserByUserName(loggedUser.getUsername());
+        userDTO.setUser(user);
+        listOfUsers.add(userDTO);
+
+        model.addAttribute("users", listOfUsers);
+        model.addAttribute("title", "Personal Cabinet");
+        model.addAttribute("message", "Personal data:");
+        return "personalCab";
+    }
+
+    @RequestMapping(value = "/alldata", method = RequestMethod.GET)
+    public String allData(Model model){
+        com.springapp.mvc.model.User user = userService.getUserByUserName(loggedUser.getUsername());
+        model.addAttribute("user", user);
+        return "allData";
     }
 
     @RequestMapping(value = "/error", method = RequestMethod.GET)
@@ -98,17 +91,10 @@ public class UserController {
 
     @RequestMapping(value = "/deleteuser", method = RequestMethod.POST)
     public String deleteUserById(@ModelAttribute("userDeleteDTO") UserDeleteDTO userDeleteDTO){
-        if (Validation.validUser(loggedUser)) {
             if (userService.deleteUserById(userDeleteDTO.getUserId())) {
                 return "redirect:/allusers";
             }
             return "error";
-        }
-        return "error";
     }
 
-    @RequestMapping(value = "/deleteuser", method = RequestMethod.GET)
-    public String deleteUser(Model model){
-        return "error";
-    }
 }

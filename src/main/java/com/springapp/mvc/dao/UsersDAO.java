@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -46,9 +47,9 @@ public class UsersDAO {
         UsersDAO.listOfUsers = listOfUsers;
     }
 
-    public List<User> findUserByCredentialsId(long credentialsId) {
-            return listOfUsers.stream()
-                    .filter(t -> t.getCredentialsId().equals(credentialsId))
-                    .collect(Collectors.toList());
+    public Optional<User> findUserByCredentialsId(long credentialsId) {
+        return listOfUsers.stream()
+                .filter(t -> t.getCredentialsId().equals(credentialsId))
+                .findAny();
     }
 }

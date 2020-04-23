@@ -2,17 +2,22 @@ package com.springapp.mvc.service;
 
 import com.springapp.mvc.dao.CredentialsDAO;
 import com.springapp.mvc.dao.UsersDAO;
+import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.dto.UserRegistDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -25,27 +30,38 @@ public class RegisterServiceTest {
     private CredentialsDAO credentialsDAO;
 
     @Mock
+    private PasswordEncoder passwordEncoder;
+
+    @Mock
     private UsersDAO usersDAO;
 
-    @Test
-    public void testAddRegisterUser(){
-        UserRegistDTO userRegistDTO = new UserRegistDTO();
+    Long id;
+
+    UserRegistDTO userRegistDTO;
+
+    User user;
+
+    Credentials credentials;
+
+    @Before
+    public void setUp() {
+        id = 1l;
+        userRegistDTO = new UserRegistDTO();
         userRegistDTO.setAge("12");
-        User user = new User(userRegistDTO.getFirstName(), userRegistDTO.getLastName(), userRegistDTO.getAge(), userRegistDTO.getHobby(), 1l);
-        Credentials credentials = new Credentials();
+        user = new User();
+        credentials = new Credentials();
+    }
 
-        when(credentialsDAO.addCredential(credentials, RoleType.ROLE_USER)).thenReturn(1l);
-
-        registerService.addRegisterUser(userRegistDTO);
-
-        verify(credentialsDAO, times(1)).addCredential(credentials, RoleType.ROLE_USER);
+    @After
+    public void tearDown(){
+        verifyNoMoreInteractions(credentialsDAO);
     }
 
     @Test
-    public void testFindIfLoginExist(){
-        String login = "iulian";
-        when(credentialsDAO.findIfLoginExist(login)).thenReturn(true);
-        assertEquals(true, registerService.findIfLoginExist(login));
+    public void testAddRegisterUser(){
+        when(credentialsDAO.addCredential(credentials, RoleType.ROLE_USER)).thenReturn(id);
+        registerService.addRegisterUser(userRegistDTO);
+        verify(credentialsDAO).addCredential(credentials, RoleType.ROLE_USER);
     }
 
 }

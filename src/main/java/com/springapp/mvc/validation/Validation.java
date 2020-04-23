@@ -3,10 +3,6 @@ package com.springapp.mvc.validation;
 import com.springapp.mvc.dto.UserRegistDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
-import com.springapp.mvc.service.RegisterService;
-import com.springapp.mvc.service.UserService;
-
-import java.util.List;
 
 public class Validation {
 
@@ -30,16 +26,5 @@ public class Validation {
         return stringValidation(password) && password.length() >= 4;
     }
 
-    public static boolean loginValidation(RegisterService registerService, String login){
-        return (!registerService.findIfLoginExist(login)) && stringValidation(login);
-    }
-
-    public static boolean registerValidation(UserRegistDTO userRegistDTO){
-         return stringValidation(userRegistDTO.getFirstName()) &&
-                stringValidation(userRegistDTO.getLastName()) &&
-                stringValidation(userRegistDTO.getHobby()) &&
-                passwordValidation(userRegistDTO.getPassword()) &&
-                ageValidation(userRegistDTO.getAge());
-    }
 
 }
