@@ -26,9 +26,6 @@ public class TestControllerMVC {
     @InjectMocks
     UserController userController;
 
-    @InjectMocks
-    RegisterController registerController;
-
     @Mock
     private UserService userService;
 
@@ -51,8 +48,10 @@ public class TestControllerMVC {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(view().name("index"));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/regist"))
-                .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+        mockMvc.perform(MockMvcRequestBuilders.get("/allusers"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(view().name("welcome"));
+
     }
 
 }
