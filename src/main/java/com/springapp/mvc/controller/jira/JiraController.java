@@ -3,11 +3,8 @@ package com.springapp.mvc.controller.jira;
 
 import com.springapp.mvc.exceptionsHandlers.CustomUserException;
 import com.springapp.mvc.model.jira.CurrentUser;
-import com.springapp.mvc.service.JiraUserService;
-import com.springapp.mvc.service.JiraUserServiceImpl;
+import com.springapp.mvc.service.jira.JiraUserServiceImpl;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Data
-@RequestMapping("/jira/create_new_session")
+@RequestMapping("/jira/user")
 public class JiraController {
 
     @Autowired
@@ -27,8 +24,8 @@ public class JiraController {
     @RequestMapping(value = "/auth", method = RequestMethod.POST)
     public ResponseEntity createNewSession() throws CustomUserException {
         try {
-            jiraUserService.getSession();
-            return new ResponseEntity<>("Success.", HttpStatus.OK);
+           return jiraUserService.getSession();
+            //return new String("Success.");
         } catch (Exception e) {
             throw new CustomUserException("Session creating error.", HttpStatus.BAD_REQUEST);
         }

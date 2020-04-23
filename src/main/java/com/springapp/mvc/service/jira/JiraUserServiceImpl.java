@@ -1,15 +1,11 @@
-package com.springapp.mvc.service;
+package com.springapp.mvc.service.jira;
 
 import com.springapp.mvc.exceptionsHandlers.CustomUserException;
 import com.springapp.mvc.model.jira.CurrentUser;
 import com.springapp.mvc.model.jira.ResponseSession;
 import com.springapp.mvc.model.jira.SessionValue;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -29,14 +25,16 @@ public class JiraUserServiceImpl implements JiraUserService {
 
     SessionValue sessionValue = new SessionValue();
 
-    @Value("${jira.username}")
+    @Value("nganja")
     private String username;
 
-    @Value("${jira.password}")
+    @Value("zJLulz__26!")
     private String password;
 
+
     @Override
-    public void getSession() {
+    public ResponseEntity getSession() {
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         Map<String, String> body = new HashMap<>();
@@ -49,14 +47,17 @@ public class JiraUserServiceImpl implements JiraUserService {
                 e.printStackTrace();
             }
         }
-        HttpEntity httpRequest = new HttpEntity(body, headers);
+        HttpEntity httpRequest = new HttpEntity<>(body, headers);
+
         sessionValue.setSessionValue(restTemplate.postForEntity(CREATE_NEW_SESSION, httpRequest, ResponseSession.class)
                 .getBody().getSession().getValue());
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<CurrentUser> getCurrentUser() {
         HttpHeaders headers = new HttpHeaders();
+
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("cookie", "JSESSIONID=" + sessionValue.getSessionValue());
         HttpEntity request = new HttpEntity<>(headers);

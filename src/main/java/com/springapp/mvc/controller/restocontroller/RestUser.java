@@ -1,11 +1,10 @@
-package com.springapp.mvc.restocontroller;
+package com.springapp.mvc.controller.restocontroller;
 
 
 import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.exceptionsHandlers.CustomUserException;
 import com.springapp.mvc.service.UserService;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

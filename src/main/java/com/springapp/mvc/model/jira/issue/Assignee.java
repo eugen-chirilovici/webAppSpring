@@ -1,17 +1,17 @@
-package com.springapp.mvc.model.jira;
+package com.springapp.mvc.model.jira.issue;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Session {
+@NoArgsConstructor
+public class Assignee {
 
+    @JsonProperty("name")
     private String name;
-    private String value;
-
 }

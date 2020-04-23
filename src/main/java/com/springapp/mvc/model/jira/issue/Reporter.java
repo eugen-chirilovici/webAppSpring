@@ -1,5 +1,8 @@
-package com.springapp.mvc.model.jira;
+package com.springapp.mvc.model.jira.issue;
 
+
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,11 +10,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Session {
+@NoArgsConstructor
+public class Reporter {
 
+    @JsonProperty("name")
     private String name;
-    private String value;
-
 }
