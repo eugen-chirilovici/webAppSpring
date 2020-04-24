@@ -1,14 +1,10 @@
 package com.springapp.mvc.dto;
 
-import com.springapp.mvc.model.User;
-import com.springapp.mvc.model.enums.Stream;
-
 public class UserMoreDetailsDTO {
     private Long userId;
     private String firstName;
     private String lastName;
-    private String hobby;
-    private Stream stream;
+    private String email;
 
     public Long getUserId() {
         return userId;
@@ -34,20 +30,11 @@ public class UserMoreDetailsDTO {
         this.lastName = lastName;
     }
 
-    public String getHobby() {
-        return hobby;
+    public String getEmail() {
+        return email;
     }
 
-    public void setHobby(String hobby) {
-        this.hobby = hobby;
+    public void setEmail(String email) {
+        this.email = email;
     }
-
-    public Stream getStream() {
-        return stream;
-    }
-
-    public void setStream(Stream stream) {
-        this.stream = stream;
-    }
-
 }

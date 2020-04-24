@@ -1,7 +1,6 @@
 package com.springapp.mvc.restcontrollers;
 
-import com.springapp.mvc.dto.UserAddRestDTO;
-import com.springapp.mvc.service.RegisterService;
+import com.springapp.mvc.dto.UserRestDTO;
 import com.springapp.mvc.service.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +18,6 @@ import static org.springframework.http.HttpStatus.OK;
 public class RestUser {
 
     @Autowired
-    private RegisterService registerService;
-
-    @Autowired
      private UserService userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -35,21 +31,21 @@ public class RestUser {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<Object> addUserRest(@RequestBody UserAddRestDTO userAddRestDTO){
-        userService.addUserRest(userAddRestDTO);
+    public ResponseEntity<Object> addUserRest(@RequestBody UserRestDTO userRestDTO){
+        userService.createUser(userRestDTO);
         return new ResponseEntity <>("User saved",CREATED);
     }
 
     @RequestMapping(value = "/user/update/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Object> updateUserByIdRest(@PathVariable Long id, @RequestBody UserAddRestDTO userAddRestDTO){
-        userService.updateUserRest(userAddRestDTO, id);
+    public ResponseEntity<Object> updateUserByIdRest(@PathVariable Long id, @RequestBody UserRestDTO userRestDTO){
+        userService.updateUser(userRestDTO, id);
         return new ResponseEntity<>("User updated", OK);
     }
 
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteUserRest (@PathVariable Long id){
-        userService.deleteUserRest(userService.getUserById(id));
+        userService.deleteUser(userService.getUserById(id));
         return new ResponseEntity<>("User deleted", OK);
     }
 

@@ -83,7 +83,7 @@ public class UserController {
     @RequestMapping(value = "/moredetails", method = RequestMethod.GET)
     public String moreDetails(Model model) {
         List<UserMoreDetailsDTO> userMoreDetailsDTOS = new ArrayList<>();
-        userMoreDetailsDTOS.add(userService.getUserInformationByIdDTO(loggedUser.getUserId()));
+        userMoreDetailsDTOS.add(userService.readUserById(loggedUser.getUserId()));
         model.addAttribute("usersdetails", userMoreDetailsDTOS);
         model.addAttribute("message", "More personal data:");
         return "moreDetails";

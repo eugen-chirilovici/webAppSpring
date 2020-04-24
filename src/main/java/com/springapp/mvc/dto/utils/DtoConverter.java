@@ -9,9 +9,8 @@ public class DtoConverter {
         UserMoreDetailsDTO userDTO = new UserMoreDetailsDTO();
         userDTO.setUserId(user.getUserId());
         userDTO.setFirstName(user.getFirstName());
-        userDTO.setHobby(user.getHobby());
         userDTO.setLastName(user.getLastName());
-        userDTO.setStream(user.getStream());
+        userDTO.setEmail(user.getEmail());
         return userDTO;
 
     }

@@ -1,24 +1,18 @@
 package com.springapp.mvc.model;
 
-import com.springapp.mvc.model.enums.Stream;
-import lombok.Builder;
-
-@Builder
 public class User {
     private Long userId;
     private String firstName;
     private String lastName;
     private Long credentialsId;
-    private Stream stream;
-    private String hobby;
+    private String email;
 
-    public User(Long userId, String firstName, String lastName, Long credentialsId, Stream stream, String hobby) {
+    public User(Long userId, String firstName, String lastName, Long credentialsId, String email) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.credentialsId = credentialsId;
-        this.stream = stream;
-        this.hobby = hobby;
+        this.email = email;
     }
 
     public User(String firstName, String lastName, Long credentialsId) {
@@ -72,19 +66,11 @@ public class User {
         this.credentialsId = credentialsId;
     }
 
-    public Stream getStream() {
-        return stream;
+    public String getEmail() {
+        return email;
     }
 
-    public void setStream(Stream stream) {
-        this.stream = stream;
-    }
-
-    public String getHobby() {
-        return hobby;
-    }
-
-    public void setHobby(String hobby) {
-        this.hobby = hobby;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
