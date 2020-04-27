@@ -1,6 +1,8 @@
 package com.springapp.mvc.controller;
 
 import com.springapp.mvc.dto.CredentialsDTO;
+import com.springapp.mvc.dto.DeleteUserDTO;
+import com.springapp.mvc.exceptionsHandlers.CustomUserException;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
@@ -10,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,14 +59,34 @@ public class UserController {
     }
 
     @RequestMapping(value = "/personal", method = RequestMethod.GET)
-    public String showPersonalData(Model model) {
+    public String showPersonalData(Model model) throws CustomUserException {
         List<User> listOfUsers = new ArrayList<>();
         listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
+        //String action =
 
         model.addAttribute("users", listOfUsers);
         model.addAttribute("title", "Personal Cabinet");
         model.addAttribute("message", "Personal data:");
         return "personalCab";
+    }
+
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    public String deleteUser(@ModelAttribute("deleteUserDTO") DeleteUserDTO deleteUserDTO) throws CustomUserException {
+
+        if(deleteUserDTO.getDeletedUserId() < 1 || deleteUserDTO.getDeletedUserId() > userService.getAllUsers().size() - 1)
+            return "redirect:/error";
+        userService.removeUserById(deleteUserDTO);
+        return "redirect:/allusers";
+    }
+
+    @RequestMapping(value = "/moreInfo", method = RequestMethod.GET)
+    public String getMorePersonalInformation(Model model) throws CustomUserException {
+        List<User> listOfUsers = new ArrayList<>();
+        listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
+        model.addAttribute("users", listOfUsers);
+        model.addAttribute("title", "Advanced info");
+        model.addAttribute("message", "More information:");
+        return "moreInfo";
     }
 
     @RequestMapping(value = "/error", method = RequestMethod.GET)

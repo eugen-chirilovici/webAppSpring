@@ -17,6 +17,7 @@ public class CredentialsDAO {
 
     static {
         listOfCredentials.add(new Credentials(id++, "echirilovici", "test", RoleType.ROLE_ADMIN));
+        listOfCredentials.add(new Credentials(id++, "bqadfa", "test", RoleType.ROLE_USER));
         listOfCredentials.add(new Credentials(id++, "cnicuta", "test", RoleType.ROLE_USER));
         listOfCredentials.add(new Credentials(id++, "frosca", "test", RoleType.ROLE_USER));
     }
@@ -25,6 +26,27 @@ public class CredentialsDAO {
         long credentialsId = id++;
         listOfCredentials.add(new Credentials(credentialsId, credentials.getLogin(), credentials.getPassword(), roleType));
         return credentialsId;
+    }
+
+    public boolean isUserExist(String login) {
+        boolean flag = false;
+        for (Credentials u : listOfCredentials) {
+            if (u.getLogin().equals(login)) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
+    public String findUserByLogin(String login)  {
+        Credentials temp = null;
+        for (Credentials c : listOfCredentials) {
+                if (c.getLogin().equals(login))
+                    temp = c;
+        }
+        assert temp != null;
+        return temp.getLogin();
     }
 
     public List<Credentials> validateUser(CredentialsDTO credentials) {

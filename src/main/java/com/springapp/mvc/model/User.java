@@ -1,10 +1,29 @@
 package com.springapp.mvc.model;
 
+import com.springapp.mvc.model.enums.GENDER;
+
+import java.util.Date;
+
 public class User {
     private Long userId;
     private String firstName;
     private String lastName;
     private Long credentialsId;
+    private String dob;
+    private GENDER gender;
+
+    public User(Long userId, String firstName, String lastName, String dob) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+    }
+
+    public User(String firstName, String lastName, String dob) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+    }
 
     public User(String firstName, String lastName, Long credentialsId) {
         this.firstName = firstName;
@@ -12,11 +31,19 @@ public class User {
         this.credentialsId = credentialsId;
     }
 
-    public User(Long userId, String firstName, String lastName, Long credentialsId) {
+    public User(Long userId, String firstName, String lastName, Long credentialsId, String dob) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.credentialsId = credentialsId;
+        this.dob = dob;
+    }
+
+    public User(String firstName, String lastName, Long credentialsId, String dob) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.credentialsId = credentialsId;
+        this.dob = dob;
     }
 
     public Long getUserId() {
@@ -49,5 +76,31 @@ public class User {
 
     public void setCredentialsId(Long credentialsId) {
         this.credentialsId = credentialsId;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public GENDER getGender() {
+        return gender;
+    }
+
+    public void setGender(GENDER gender) {
+        this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dob='" + dob + '\'' +
+                '}';
     }
 }

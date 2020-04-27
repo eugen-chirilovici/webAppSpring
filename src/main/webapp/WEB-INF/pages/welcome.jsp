@@ -14,7 +14,12 @@
 <h2>${message}</h2>
 <c:forEach items="${users}" var="user">
     <p>User Id: ${user.userId} | First Name: ${user.firstName} | Last Name: ${user.lastName}</p>
-</c:forEach>
 
+</c:forEach>
+            <form:form method="post" action="deleteUser">
+                </br></br><p>Type in id of user:</p>
+        <input type="number" name="deletedUserId" value="Id"></br></br>
+                <button type="submit" name="deleteUser">Delete</button>
+            </form:form>
 </body>
 </html>

@@ -1,12 +1,32 @@
 package com.springapp.mvc.dto;
 
-public class UserRegistDTO {
+import com.springapp.mvc.model.User;
+import lombok.*;
 
+
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserDTO {
+
+    private Long id;
     private String firstName;
     private String lastName;
     private String dob;
-    private String login;
-    private String password;
+
+    public UserDTO(User user) {
+        this.id = user.getCredentialsId();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.dob = user.getDob();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -22,22 +42,6 @@ public class UserRegistDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getDob() {
