@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Repository
 public class CredentialsDAO {
@@ -16,11 +16,33 @@ public class CredentialsDAO {
     private static long id = 0L;
 
     static {
-        listOfCredentials.add(new Credentials(id++, "echirilovici", "test", RoleType.ROLE_ADMIN));
-        listOfCredentials.add(new Credentials(id++, "cnicuta", "test", RoleType.ROLE_USER));
-        listOfCredentials.add(new Credentials(id++, "frosca", "test", RoleType.ROLE_USER));
-        listOfCredentials.add(new Credentials(id++, "dacian", "test", RoleType.ROLE_USER));
+        listOfCredentials.add(new Credentials(id++,
+                "echirilovici",
+                "$2a$10$m1sRJuy0ZvX69ey/7Xd2zuWAG7ddouWqC..ImkHawJTrm8QiwSSA.",
+                RoleType.ROLE_ADMIN));
+        listOfCredentials.add(new Credentials(id++,
+                "cnicuta",
+                "$2a$10$m1sRJuy0ZvX69ey/7Xd2zuWAG7ddouWqC..ImkHawJTrm8QiwSSA.",
+                RoleType.ROLE_USER));
+        listOfCredentials.add(new Credentials(id++,
+                "frosca",
+                "$2a$10$m1sRJuy0ZvX69ey/7Xd2zuWAG7ddouWqC..ImkHawJTrm8QiwSSA.",
+                RoleType.ROLE_USER));
     }
+
+    public Credentials findCredentialsById(Long userId) {
+        for (Credentials credentials : listOfCredentials) {
+            if (credentials.getId() == userId) {
+                return credentials;
+            }
+        }
+        return null;
+    }
+
+    public void deleteCredentials(Credentials credentials){
+        listOfCredentials.remove(credentials);
+    }
+
 
     public Long addCredential(Credentials credentials, RoleType roleType) {
         long credentialsId = id++;
@@ -51,11 +73,19 @@ public class CredentialsDAO {
         assert credentials!=null;
         return credentials.getLogin();
     }
-    public List<Credentials> validateUser(CredentialsDTO credentials) {
+    public Optional<Credentials> validateUser(CredentialsDTO credentials) {
         return listOfCredentials.stream()
                 .filter(t -> t.getLogin().equals(credentials.getLogin()) &&
                         t.getPassword().equals(credentials.getPassword()))
-                .collect(Collectors.toList());
+                .findAny();
     }
+
+
+    public Optional<Credentials> findByUsername(String login) {
+        return listOfCredentials.stream()
+                .filter(t -> t.getLogin().equals(login))
+                .findAny();
+    }
+
 
 }

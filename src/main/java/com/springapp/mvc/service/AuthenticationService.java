@@ -6,7 +6,7 @@ import com.springapp.mvc.model.Credentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthenticationService {
@@ -14,12 +14,10 @@ public class AuthenticationService {
     @Autowired
     private CredentialsDAO credentialsDAO;
 
+
     public Credentials confirmAuthentication(CredentialsDTO credentials) {
-        List<Credentials> userCredentials = credentialsDAO.validateUser(credentials);
-        if (!userCredentials.isEmpty() && userCredentials.size() == 1) {
-            return userCredentials.get(0);
-        }
-        return null;
+        Optional<Credentials> credentialsOfUser = credentialsDAO.validateUser(credentials);
+        return credentialsOfUser.orElse(null);
     }
 
     public CredentialsDAO getCredentialsDAO() {
