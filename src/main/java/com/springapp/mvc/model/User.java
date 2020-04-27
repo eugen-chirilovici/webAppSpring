@@ -1,16 +1,16 @@
 package com.springapp.mvc.model;
 
 import com.springapp.mvc.model.enums.GENDER;
+import lombok.Builder;
 
 import java.util.Date;
-
+@Builder
 public class User {
     private Long userId;
     private String firstName;
     private String lastName;
     private Long credentialsId;
     private String dob;
-    private GENDER gender;
 
     public User(String firstName, String lastName, Long credentialsId) {
         this.firstName = firstName;
@@ -73,11 +73,4 @@ public class User {
         this.dob = dob;
     }
 
-    public GENDER getGender() {
-        return gender;
-    }
-
-    public void setGender(GENDER gender) {
-        this.gender = gender;
-    }
 }

@@ -1,9 +1,11 @@
 package com.springapp.mvc.model;
 
 import com.springapp.mvc.model.enums.RoleType;
+import lombok.Builder;
 
 import java.util.Objects;
 
+@Builder
 public class Credentials {
 
     private long id;

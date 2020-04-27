@@ -5,9 +5,7 @@ import com.springapp.mvc.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -16,23 +14,20 @@ public class RegisterController {
     @Autowired
     private RegisterService registerService;
 
-    @RequestMapping(value = "/regist", method = RequestMethod.GET)
+    @GetMapping(value = "/regist")
     public String getRegistPage(Model model){
-        model.addAttribute("message", "Register page");
-        return "register";
+
+            model.addAttribute("message", "Register page");
+            return "register";
+
     }
 
 
-    @RequestMapping(value = "/regist", method = RequestMethod.POST)
+    @PostMapping(value = "/regist")
     public String registNewUser(@ModelAttribute("userRegistDTO") UserRegistDTO userRegistDTO){
 
-        if (registerService.validateExistingLogin(userRegistDTO)) {
-            return "loginError";
-        }
-
-        else {
             registerService.addRegisterUser(userRegistDTO);
             return "index";
-        }
+
     }
 }

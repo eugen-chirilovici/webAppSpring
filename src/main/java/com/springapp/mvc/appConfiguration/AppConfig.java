@@ -1,5 +1,6 @@
 package com.springapp.mvc.appConfiguration;
 
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-@Configuration
-@EnableWebMvc
+@SpringBootConfiguration
 @ComponentScan(basePackages = "com.springapp.mvc")
 public class AppConfig extends WebMvcConfigurerAdapter {
 

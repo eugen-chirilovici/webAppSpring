@@ -1,35 +1,26 @@
-package app.mvc;
 
 import com.springapp.mvc.dao.CredentialsDAO;
 import com.springapp.mvc.dao.UsersDAO;
-import com.springapp.mvc.dto.DeleteUserDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
-import com.springapp.mvc.model.enums.RoleType;
 import com.springapp.mvc.service.UserService;
+import com.springapp.mvc.utils.UserUtils;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 import java.util.Optional;
 
-import static com.springapp.mvc.dao.UsersDAO.getListOfUsers;
-//import static com.sun.javaws.JnlpxArgs.verify;
-import static java.util.Arrays.asList;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.powermock.api.mockito.PowerMockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(UsersDAO.class)
+@RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
 
     @InjectMocks
@@ -41,55 +32,77 @@ public class UserServiceTest {
     @Mock
     private CredentialsDAO credentialsDAO;
 
+    private Long id;
 
-    @Test
-    public void getAllUserTest() {
-        User user = new User("Eugen", "Chirilovici", 0L,"15 sept 1997");
+    private User user;
 
-        List<User> userList = asList(user);
-        mockStatic(UsersDAO.class);
+    private List<User> userList;
 
-        when(getListOfUsers()).thenReturn(userList);
-        assertEquals(userList, getListOfUsers());
+    private Credentials credentials;
+
+    @Before
+    public void setUp(){
+        MockitoAnnotations.initMocks(this);
+        user = new UserUtils().createUser();
+        userList = new UserUtils().createListOfUsers();
+        credentials = new UserUtils().createCredentials();
     }
 
-    @Test
-    public void getUserByIdTest() {
-        final User expectedUser = new User("Eugen", "Chirilovici", 0L,"15 sept 1997");
-
-        when(usersDAO.findUserById(expectedUser.getUserId())).thenReturn(expectedUser);
-
-        final User actualUser = userService.getUserById(expectedUser.getUserId());
-        assertEquals(expectedUser, actualUser);
-    }
-
-    @Test
-    public void getUserByCredentialsTest() {
-
-        final Credentials credentialsForExpectedUser = new Credentials(0L, "echirilovici", "test", RoleType.ROLE_ADMIN);
-        User user = new User("Eugen", "Chirilovici", 0L,"15 sept 1997");
-        final List<User> expectedUser = asList(user);
-
-        when(usersDAO.findUserByCredentialsId(credentialsForExpectedUser.getId())).thenReturn((expectedUser));
-
-        final User actualUser = userService.getUserByCredentials(credentialsForExpectedUser);
-
-        assertEquals(expectedUser.get(0), actualUser);
-    }
-
-    @Test
-    public void deleteUserTest() {
-        User user = new User("Eugen", "Chirilovici", 0L,"15 sept 1997");
-        List<User> userL = asList(user);
-        DeleteUserDTO deleteUserDTO = new DeleteUserDTO(0L);
-
-        when(usersDAO.findUserById(0L)).thenReturn(user);
-
-        userService.removeUserById(deleteUserDTO);
-
-        verify(usersDAO, times(1)).findUserById(0L);
-        verify(usersDAO, times(1)).deleteUser(user);
+    @After
+    public void teardown(){
+        verifyNoMoreInteractions(usersDAO);
     }
 
 
+    @Test
+    public void testGetUserById(){
+        when(usersDAO.findUserById(id)).thenReturn(user);
+        assertEquals(user, userService.getUserById(id));
+        verify(usersDAO).findUserById(id);
+    }
+
+    @Test
+    public void getUserInformationById(){
+        when(usersDAO.findUserById(id)).thenReturn(user);
+        assertNotNull(userService.getUserByInfoId(id));
+        verify(usersDAO).findUserById(id);
+    }
+
+
+    @Test
+    public void getUserByCredentials(){
+        when(usersDAO.findUserByCredentialsId(id)).thenReturn(Optional.of(user));
+        assertNotNull(userService.getUserByCredentials(credentials));
+        verify(usersDAO).findUserByCredentialsId(id);
+    }
+
+    @Test
+    public void negativeScenarioGetUserByCredentials(){
+        when(usersDAO.findUserByCredentialsId(id)).thenReturn(Optional.of(user));
+        assertNotNull(userService.getUserByCredentials(credentials).getUserId());
+        verify(usersDAO).findUserByCredentialsId(id);
+    }
+
+    @Test
+    public void deleteUserById(){
+
+        when(usersDAO.findUserById(id)).thenReturn(user);
+        when(credentialsDAO.findCredentialsById(id)).thenReturn(credentials);
+
+        assertTrue(userService.removeUserById(id));
+
+        verify(usersDAO).findUserById(id);
+        verify(usersDAO).deleteUser(user);
+
+        verify(credentialsDAO).findCredentialsById(id);
+        verify(credentialsDAO).deleteCredentials(credentials);
+    }
+
+    @Test
+    public void negativeScenarioDeleteUserById(){
+        when(usersDAO.findUserById(id)).thenReturn(null);
+        when(credentialsDAO.findCredentialsById(id)).thenReturn(null);
+        assertFalse(userService.removeUserById(id));
+        verify(usersDAO).findUserById(id);
+    }
 }
