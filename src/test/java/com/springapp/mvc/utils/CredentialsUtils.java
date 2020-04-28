@@ -12,7 +12,7 @@ public class CredentialsUtils {
         return Credentials.builder()
                 .id(123456L)
                 .password("test123")
-                .login("test")
+                .login("denis")
                 .role(RoleType.ROLE_USER)
                 .build();
     }

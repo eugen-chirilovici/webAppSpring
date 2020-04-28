@@ -11,7 +11,7 @@ public class UserUtils {
 
         public static User createUser() {
             return User.builder()
-                    .userId(2L)
+                    .userId(3L)
                     .firstName("Denis")
                     .lastName("Gurduza")
                     .credentialsId(123456L)
@@ -30,7 +30,7 @@ public class UserUtils {
             listOfUsers.add(new User(id++, "Eugen", "Chirilovici", 0L));
             listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 1L));
             listOfUsers.add(new User(id++, "Filip", "Rosca", 2L));
-            listOfUsers.add(new User(id++, "Filip", "Rosca", 2L));
+            listOfUsers.add(new User(id++, "Denis", "Gurduza", 123456L));
             return listOfUsers;
         }
 

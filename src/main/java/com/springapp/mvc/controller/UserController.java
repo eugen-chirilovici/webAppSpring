@@ -36,12 +36,12 @@ public class UserController {
 
 
     @RequestMapping(value = "/login")
-    public String submit(){
+    public String submit() {
 
         loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (loggedUser != null) {
-            if (loggedUser.getAuthorities().contains(new SimpleGrantedAuthority(RoleType.ROLE_ADMIN.getValue()))){
+            if (loggedUser.getAuthorities().contains(new SimpleGrantedAuthority(RoleType.ROLE_ADMIN.getValue()))) {
                 return "redirect:/allusers";
             } else if (loggedUser.getAuthorities().contains(new SimpleGrantedAuthority(RoleType.ROLE_USER.getValue()))) {
                 return "redirect:/personal";

@@ -1,102 +1,70 @@
-//package com.springapp.mvc.service;
-//
-//import com.springapp.mvc.dao.CredentialsDAO;
-//import com.springapp.mvc.dao.UsersDAO;
-//import com.springapp.mvc.model.Credentials;
-//import com.springapp.mvc.model.User;
-//import com.springapp.mvc.utils.CredentialsUtils;
-//import com.springapp.mvc.utils.UserUtils;
-//import org.junit.After;
-//import org.junit.Before;
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
-//import org.mockito.InjectMocks;
-//import org.mockito.Mock;
-//import org.mockito.Mockito;
-//import org.mockito.MockitoAnnotations;
-//import org.mockito.junit.MockitoJUnitRunner;
-//import org.powermock.api.mockito.PowerMockito;
-//
-//import java.util.Collections;
-//import java.util.List;
-//import static org.junit.Assert.*;
-//import static org.mockito.Mockito.*;
-//import static org.powermock.api.mockito.PowerMockito.mockStatic;
-//
-//
-//@RunWith(MockitoJUnitRunner.class)
-//public class UserServiceTest {
-//
-//    @InjectMocks
-//    private UserService userService;
-//
-//    @Mock
-//    private UsersDAO usersDAO;
-//
-//    @Mock
-//    private CredentialsDAO credentialsDAO;
-//
-//    @Before
-//    public void setUp() throws Exception {
-//        MockitoAnnotations.initMocks(this);
-//    }
-//
-//    @After
-//    public void tearDown() {
-//        verifyNoMoreInteractions(usersDAO);
-//    }
-//
-//    @Test
-//    public void getAllUsers() {
-//
-//        final List <User> expectedUserList = UserUtils.createUserList();
-//        mockStatic(UsersDAO.class);
-//        when(usersDAO.getListOfUsers()).thenReturn(expectedUserList);
-//
-//        final List<User> actualUserList = userService.getAllUsers();
-//
-//        assertEquals(actualUserList,expectedUserList);
-//
-//    }
-//
-//    @Test
-//    public void getUserById() {
-//        final User expectedUser = UserUtils.createUser();
-//        when(usersDAO.findUserById(expectedUser.getUserId())).thenReturn(expectedUser);
-//        final User actualUser = userService.getUserById(expectedUser.getUserId());
-//
-//        verify(usersDAO).findUserById(expectedUser.getUserId());
-//        assertEquals(expectedUser, actualUser);
-//    }
-//
-//    @Test
-//    public void getUserByCredentials() {
-//        final Credentials credentialsForExpectedUser = CredentialsUtils.createCredentialsForUserRole();
-//        final User expectedUser = UserUtils.createUser();
-//        final List <User> userList = Collections.singletonList(expectedUser);
-//
-//        when(usersDAO.findUserByCredentialsId(credentialsForExpectedUser.getId())).thenReturn(userList);
-//
-//        final User actualUser = userService.getUserByCredentials(credentialsForExpectedUser);
-//
-//        verify(usersDAO).findUserByCredentialsId(expectedUser.getCredentialsId());
-//        assertEquals(expectedUser, actualUser);
-//
-//    }
-//
-//
-//    @Test
-//    public void deletedUserList() {
-//
-//        mockStatic(UsersDAO.class);
-//        final List<User> expectedUserUtils = UserUtils.createUserList();
-//
-//        Mockito.when(UsersDAO.getListOfUsers()).thenReturn(expectedUserUtils);
-//
-//        List<User> actualUsers = userService.deletedUserList(UserUtils.createUser());
-//
-//        assertEquals(expectedUserUtils , actualUsers);
-//    }
-//
-//
-//}
+package com.springapp.mvc.service;
+
+import com.springapp.mvc.dao.UsersDAO;
+import com.springapp.mvc.model.Credentials;
+import com.springapp.mvc.model.User;
+import com.springapp.mvc.utils.CredentialsUtils;
+import com.springapp.mvc.utils.UserUtils;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Optional;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
+
+
+@RunWith(SpringRunner.class)
+@SpringBootTest()
+public class UserServiceTest {
+
+    @InjectMocks
+    private UserService userService;
+
+    @Mock
+    private UsersDAO usersDAO;
+
+    @Before
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
+
+    }
+
+    @After
+    public void tearDown() {
+        verifyNoMoreInteractions(usersDAO);
+    }
+
+
+    @Test
+    public void getUserById() {
+        final User expectedUser = UserUtils.createUser();
+        when(usersDAO.findUserById(expectedUser.getUserId())).thenReturn(expectedUser);
+        final User actualUser = userService.getUserById(expectedUser.getUserId());
+
+        verify(usersDAO).findUserById(expectedUser.getUserId());
+        assertEquals(expectedUser, actualUser);
+    }
+
+    @Test
+    public void getUserByCredentials() {
+        final Credentials credentialsForExpectedUser = CredentialsUtils.createCredentialsForUserRole();
+        final Optional<User> expectedUser = Optional.ofNullable(UserUtils.createUser());
+
+        when(usersDAO.findUserByCredentialsId(credentialsForExpectedUser.getId())).thenReturn((expectedUser));
+
+        final Optional<User> actualUser = usersDAO.findUserByCredentialsId(credentialsForExpectedUser.getId());
+
+        verify(usersDAO).findUserByCredentialsId(expectedUser.get().getCredentialsId());
+        assertEquals(expectedUser, actualUser);
+
+    }
+
+}

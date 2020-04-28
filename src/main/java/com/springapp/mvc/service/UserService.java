@@ -36,7 +36,7 @@ public class UserService {
         return convertUserToDto(user);
     }
 
-    public List <User> deletedUserList(User user) {
+    public List<User> deletedUserList(User user) {
         getAllUsers().remove(user);
         return getAllUsers();
     }
