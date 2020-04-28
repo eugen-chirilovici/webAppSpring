@@ -27,4 +27,6 @@ public class AuthenticationService {
     public void setCredentialsDAO(CredentialsDAO credentialsDAO) {
         this.credentialsDAO = credentialsDAO;
     }
+
+
 }

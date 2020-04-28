@@ -1,5 +1,8 @@
 package com.springapp.mvc.dto;
 
+import lombok.Builder;
+
+@Builder
 public class UserRegistDTO {
 
     private String firstName;

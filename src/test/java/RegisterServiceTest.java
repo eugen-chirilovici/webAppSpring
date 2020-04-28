@@ -5,12 +5,14 @@ import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
 import com.springapp.mvc.service.RegisterService;
+import com.springapp.mvc.utils.UserUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -41,11 +43,10 @@ public class RegisterServiceTest {
 
     @Before
     public void setUp(){
-        id = 1l;
-        userRegistDTO = new UserRegistDTO();
-        userRegistDTO.setOrganization("Endava");
-        user = new User();
-        credentials = new Credentials();
+        MockitoAnnotations.initMocks(this);
+        user = new UserUtils().createUser();
+        credentials = new UserUtils().createCredentials();
+        userRegistDTO = new UserUtils().createRegistDTO();
     }
 
     @After
