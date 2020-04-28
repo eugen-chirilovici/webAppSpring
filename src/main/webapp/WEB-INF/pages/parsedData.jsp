@@ -11,7 +11,7 @@
     <title>Parsed</title>
 </head>
 <body>
-    <p>First Name: ${user.firstName} | Last Name: ${user.lastName} | Hobby: ${user.hobby} |
-        Music preferences: ${user.musicPreferences} | Age: ${user.age}</p>
+<p>First Name: ${user.firstName} | Last Name: ${user.lastName} | Hobby: ${user.hobby} |
+    Music preferences: ${user.musicPreferences} | Age: ${user.age}</p>
 </body>
 </html>

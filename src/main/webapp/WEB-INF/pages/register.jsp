@@ -25,7 +25,7 @@
                 <input type="text" placeholder="Last name" name="lastName" required>
 
                 <label>User name</label>
-                <input type="text" placeholder="User name" name="login" required>
+                <input type="text" placeholder="User name" name="username" required>
 
                 <label>Password</label>
                 <input type="password" placeholder="Enter Password" name="password" required>
