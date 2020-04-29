@@ -1,3 +1,5 @@
+package com.springapp.mvc.service;
+
 import com.springapp.mvc.dao.CredentialsDAO;
 import com.springapp.mvc.dto.CredentialsDTO;
 import com.springapp.mvc.model.Credentials;
