@@ -25,7 +25,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
     private org.springframework.security.core.userdetails.User loggedUser;
+
+    private com.springapp.mvc.model.User user;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
@@ -42,7 +45,6 @@ public class UserController {
     @RequestMapping(value = "/welcome")
     public String submit() {
         loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
 
         if (loggedUser != null) {
             if (loggedUser.getAuthorities().contains(new SimpleGrantedAuthority(RoleType.ROLE_ADMIN.getValue()))) {
@@ -66,7 +68,7 @@ public class UserController {
     public String showPersonalData(Model model) {
         List<UserDTO> listOfUsers = new ArrayList<>();
         UserDTO userDTO = new UserDTO();
-        com.springapp.mvc.model.User user = userService.getUserByUserName(loggedUser.getUsername());
+        user = userService.getUserByUserName(loggedUser.getUsername());
         userDTO.setUser(user);
         listOfUsers.add(userDTO);
 
@@ -78,7 +80,7 @@ public class UserController {
 
     @RequestMapping(value = "/alldata", method = RequestMethod.GET)
     public String allData(Model model){
-        com.springapp.mvc.model.User user = userService.getUserByUserName(loggedUser.getUsername());
+        user = userService.getUserByUserName(loggedUser.getUsername());
         model.addAttribute("user", user);
         return "allData";
     }
