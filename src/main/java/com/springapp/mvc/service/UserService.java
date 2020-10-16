@@ -1,12 +1,15 @@
 package com.springapp.mvc.service;
 
 import com.springapp.mvc.dao.UsersDAO;
+import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
+import com.springapp.mvc.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -14,12 +17,14 @@ public class UserService {
     @Autowired
     private UsersDAO usersDAO;
 
-    public List<User> getAllUsers() {
-        return UsersDAO.getListOfUsers();
+    public List<UserDTO> getAllUsers() {
+        return UsersDAO.getListOfUsers().stream()
+                       .map(Converter.convertFromUserToUserDTO)
+                       .collect(Collectors.toList());
     }
 
-    public User getUserById(Long userId) {
-        return usersDAO.findUserById(userId);
+    public UserDTO getUserById(Long userId) {
+        return Converter.convertFromUserToUserDTO.apply(usersDAO.findUserById(userId));
     }
 
     public User getUserByCredentials(Credentials userCredentials) {

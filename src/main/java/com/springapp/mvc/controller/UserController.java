@@ -1,6 +1,7 @@
 package com.springapp.mvc.controller;
 
 import com.springapp.mvc.dto.CredentialsDTO;
+import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -61,7 +61,7 @@ public class UserController {
 
     @RequestMapping(value = "/personal", method = RequestMethod.GET)
     public String showPersonalData(Model model) {
-        List<User> listOfUsers = new ArrayList<>();
+        List<UserDTO> listOfUsers = new ArrayList<>();
         listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
 
         model.addAttribute("users", listOfUsers);
