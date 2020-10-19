@@ -25,6 +25,10 @@ public class UsersDAO {
         return userId;
     }
 
+    public void deleteUser(int id){
+        listOfUsers.remove(listOfUsers.get(id));
+    }
+
     public User findUserById(Long userId) {
         for (User user : listOfUsers) {
             if (user.getUserId().equals(userId)) {

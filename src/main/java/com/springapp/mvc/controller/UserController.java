@@ -89,4 +89,13 @@ public class UserController {
         model.addAttribute("messages", "Personal data:");
         return "moreDetails";
     }
+
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    public String optionToDelete(@ModelAttribute("userDTO") UserDTO userDTO){
+        if(Long.valueOf(userDTO.getUserId()).equals(loggedUser.getUserId())){
+            return "redirect:/error";
+        }
+        userService.deleteUserById(Integer.valueOf(userDTO.getUserId()));
+        return "redirect:/allusers";
+    }
 }

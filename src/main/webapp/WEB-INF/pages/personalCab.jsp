@@ -20,6 +20,18 @@
         <a href="/tomcat_spring_app_war/details">More details</a>
         <br />
     </c:when>
+    <c:otherwise>
+            <div style="width: 300px; height: 500px;">
+                <form:form method="POST" action="deleteUser">
+                    <div class="container" align="left">
+                        <label>Enter ID</label>
+                        <input type="text" name="userId"/>
+
+                        <button type="submit">Delete User</button>
+                    </div>
+                </form:form>
+            </div>
+    </c:otherwise>
 </c:choose>
 </body>
 </html>

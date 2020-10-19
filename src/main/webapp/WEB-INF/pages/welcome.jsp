@@ -15,6 +15,6 @@
 <c:forEach items="${users}" var="user">
     <p>User Id: ${user.userId} | First Name: ${user.firstName} | Last Name: ${user.lastName}</p>
 </c:forEach>
-
+<a href = "/tomcat_spring_app_war/personal">Personal Cabinet</a>
 </body>
 </html>

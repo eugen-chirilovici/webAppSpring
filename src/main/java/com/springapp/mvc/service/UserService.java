@@ -9,6 +9,7 @@ import com.springapp.mvc.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,10 @@ public class UserService {
 
     public UserDTO getUserById(Long userId) {
         return Converter.convertFromUserToUserDTO.apply(usersDAO.findUserById(userId));
+    }
+
+    public void deleteUserById(Integer userID){
+        usersDAO.deleteUser(userID);
     }
 
     public User getUserByCredentials(Credentials userCredentials) {
