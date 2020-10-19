@@ -4,6 +4,7 @@ public class CredentialsDTO {
 
     private String login;
     private String password;
+    private String roleType;
 
     public CredentialsDTO() {
     }
@@ -22,5 +23,9 @@ public class CredentialsDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRoleType(){
+        return roleType;
     }
 }

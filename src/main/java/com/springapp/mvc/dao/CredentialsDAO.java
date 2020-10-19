@@ -27,6 +27,10 @@ public class CredentialsDAO {
         return credentialsId;
     }
 
+    public Credentials getCredentials(int id){
+        return listOfCredentials.get(id);
+    }
+
     public List<Credentials> validateUser(CredentialsDTO credentials) {
         return listOfCredentials.stream()
                 .filter(t -> t.getLogin().equals(credentials.getLogin()) &&

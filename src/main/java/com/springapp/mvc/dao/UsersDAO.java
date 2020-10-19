@@ -14,14 +14,14 @@ public class UsersDAO {
     private static List<User> listOfUsers = new ArrayList<>();
 
     static {
-        listOfUsers.add(new User(id++, "Eugen", "Chirilovici", 0L));
-        listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 1L));
-        listOfUsers.add(new User(id++, "Filip", "Rosca", 2L));
+        listOfUsers.add(new User(id++, "Eugen", "Chirilovici", 0L ,"Football",24));
+        listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 1L,"Skating",30));
+        listOfUsers.add(new User(id++, "Filip", "Rosca", 2L, "Painting",21));
     }
 
     public Long addUser(User user) {
         long userId = id++;
-        listOfUsers.add(new User(userId, user.getFirstName(), user.getLastName(), user.getCredentialsId()));
+        listOfUsers.add(new User(userId, user.getFirstName(), user.getLastName(), user.getCredentialsId(),user.getHobby(),user.getAge()));
         return userId;
     }
 

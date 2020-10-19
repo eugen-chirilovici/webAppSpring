@@ -4,6 +4,7 @@ import com.springapp.mvc.dao.UsersDAO;
 import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
+import com.springapp.mvc.model.enums.RoleType;
 import com.springapp.mvc.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -9,17 +9,12 @@
     <title></title>
 </head>
 <body>
-<h1>${title}</h1>
+<h1>${titles}</h1>
 <br>
-<h2>${message}</h2>
+<h2>${messages}</h2>
 <c:forEach items="${users}" var="user">
-    <p>First Name: ${user.firstName} | Last Name: ${user.lastName}</p>
+    <p>First Name: ${user.firstName} | Last Name: ${user.lastName} | Hobby: ${user.hobby} | Age: ${user.age}</p>
 </c:forEach>
-<c:choose>
-    <c:when test="${role == 'ROLE_USER'}">
-        <a href="/tomcat_spring_app_war/details">More details</a>
-        <br />
-    </c:when>
-</c:choose>
+
 </body>
 </html>

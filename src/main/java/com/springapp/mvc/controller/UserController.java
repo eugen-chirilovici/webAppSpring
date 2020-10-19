@@ -1,5 +1,6 @@
 package com.springapp.mvc.controller;
 
+import com.springapp.mvc.dao.CredentialsDAO;
 import com.springapp.mvc.dto.CredentialsDTO;
 import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.Credentials;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +69,7 @@ public class UserController {
         model.addAttribute("users", listOfUsers);
         model.addAttribute("title", "Personal Cabinet");
         model.addAttribute("message", "Personal data:");
+        model.addAttribute("role",authenticationService.getCredentialsDAO(loggedUser.getUserId()).getRole().toString());
         return "personalCab";
     }
 
@@ -74,5 +77,16 @@ public class UserController {
     public String errorConnection(ModelMap model) {
         model.addAttribute("errorMessage", "Invalid Details");
         return "error";
+    }
+
+    @RequestMapping(value = "/details",method = RequestMethod.GET)
+    public String showDetails(Model model){
+        List<UserDTO> listOfUsers = new ArrayList<>();
+        listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
+
+        model.addAttribute("users", listOfUsers);
+        model.addAttribute("titles", "Personal Cabinet");
+        model.addAttribute("messages", "Personal data:");
+        return "moreDetails";
     }
 }

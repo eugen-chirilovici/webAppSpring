@@ -5,6 +5,8 @@ public class UserDTO {
     private String firstName;
     private String lastName;
     private String credentialsId;
+    private String hobby;
+    private String age;
 
     public String getUserId() {
         return userId;
@@ -38,4 +40,19 @@ public class UserDTO {
         this.credentialsId = credentialsId;
     }
 
+    public String getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
 }
