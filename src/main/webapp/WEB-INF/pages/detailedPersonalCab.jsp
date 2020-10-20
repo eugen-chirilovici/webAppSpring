@@ -12,16 +12,8 @@
 <h1>${title}</h1>
 <br>
 <h2>${message}</h2>
-<c:forEach items="${users}" var="user">
-    <c:choose>
-        <c:when test="${role=='ROLE_USER'}">
-            <p>First Name: ${user.firstName} | Last Name: ${user.lastName} | <a href="details">more details</a></p>
-        </c:when>
-        <c:otherwise>
-            <p>First Name: ${user.firstName} | Last Name: ${user.lastName} </p>
-        </c:otherwise>
-    </c:choose>
-</c:forEach>
+
+<p>First Name: ${user.firstName} | Last Name: ${user.lastName} | Nickname: ${user.nickname} | Birthday: ${user.birthday}</p>
 
 </body>
 </html>

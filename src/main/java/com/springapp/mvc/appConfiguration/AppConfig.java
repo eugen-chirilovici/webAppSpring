@@ -21,6 +21,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
                 .addResourceHandler("/resources/**")
                 .addResourceLocations("/WEB-INF/resources/");
     }
+
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();

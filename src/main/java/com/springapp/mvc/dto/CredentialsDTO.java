@@ -3,6 +3,7 @@ package com.springapp.mvc.dto;
 public class CredentialsDTO {
 
     private String login;
+
     private String password;
 
     public CredentialsDTO() {

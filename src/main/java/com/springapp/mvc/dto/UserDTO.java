@@ -1,10 +1,18 @@
 package com.springapp.mvc.dto;
 
 public class UserDTO {
+
     private String userId;
+
     private String firstName;
+
     private String lastName;
+
     private String credentialsId;
+
+    private String nickname;
+
+    private String birthday;
 
     public String getUserId() {
         return userId;
@@ -38,4 +46,19 @@ public class UserDTO {
         this.credentialsId = credentialsId;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(final String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(final String birthday) {
+        this.birthday = birthday;
+    }
 }

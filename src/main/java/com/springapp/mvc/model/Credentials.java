@@ -1,14 +1,17 @@
 package com.springapp.mvc.model;
 
-import com.springapp.mvc.model.enums.RoleType;
-
 import java.util.Objects;
+
+import com.springapp.mvc.model.enums.RoleType;
 
 public class Credentials {
 
     private long id;
+
     private String login;
+
     private String password;
+
     private RoleType role;
 
     public Credentials() {
@@ -47,8 +50,12 @@ public class Credentials {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Credentials that = (Credentials) o;
         return Objects.equals(login, that.login) &&
                 Objects.equals(password, that.password) &&

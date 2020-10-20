@@ -3,8 +3,11 @@ package com.springapp.mvc.dto;
 public class UserRegistDTO {
 
     private String firstName;
+
     private String lastName;
+
     private String login;
+
     private String password;
 
     public String getFirstName() {

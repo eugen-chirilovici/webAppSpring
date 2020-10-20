@@ -1,9 +1,9 @@
 package com.springapp.mvc.utils;
 
+import java.util.function.Function;
+
 import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.User;
-
-import java.util.function.Function;
 
 public class Converter {
 
@@ -13,6 +13,8 @@ public class Converter {
         userDTO.setCredentialsId(user.getCredentialsId().toString());
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
+        userDTO.setNickname(user.getNickname());
+        userDTO.setBirthday(user.getBirthday());
         return userDTO;
     };
 

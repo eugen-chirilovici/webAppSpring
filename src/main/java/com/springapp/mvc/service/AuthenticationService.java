@@ -1,12 +1,13 @@
 package com.springapp.mvc.service;
 
+import java.util.List;
+
 import com.springapp.mvc.dao.CredentialsDAO;
 import com.springapp.mvc.dto.CredentialsDTO;
 import com.springapp.mvc.model.Credentials;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AuthenticationService {

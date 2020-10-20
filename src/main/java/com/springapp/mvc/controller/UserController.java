@@ -1,5 +1,8 @@
 package com.springapp.mvc.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.springapp.mvc.dto.CredentialsDTO;
 import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.Credentials;
@@ -7,6 +10,7 @@ import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
 import com.springapp.mvc.service.AuthenticationService;
 import com.springapp.mvc.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +18,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -63,11 +64,21 @@ public class UserController {
     public String showPersonalData(Model model) {
         List<UserDTO> listOfUsers = new ArrayList<>();
         listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
-
+        RoleType roleType = userService.getUserRoleByCredentialsId(loggedUser.getCredentialsId());
         model.addAttribute("users", listOfUsers);
         model.addAttribute("title", "Personal Cabinet");
         model.addAttribute("message", "Personal data:");
+        model.addAttribute("role", roleType);
         return "personalCab";
+    }
+
+    @RequestMapping(value = "/details", method = RequestMethod.GET)
+    public String showDetailedPersonalData(Model model) {
+        final UserDTO userById = userService.getUserById(loggedUser.getUserId());
+        model.addAttribute("user", userById);
+        model.addAttribute("title", "Detailed Personal Cabinet");
+        model.addAttribute("message", "Personal data:");
+        return "detailedPersonalCab";
     }
 
     @RequestMapping(value = "/error", method = RequestMethod.GET)

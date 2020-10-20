@@ -1,7 +1,9 @@
 package com.springapp.mvc.model;
 
 public class UserForm {
+
     private User user;
+
     private Credentials credentials;
 
     public User getUser() {
