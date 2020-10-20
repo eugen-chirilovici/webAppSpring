@@ -16,15 +16,20 @@ public class RegisterController {
     private RegisterService registerService;
 
     @RequestMapping(value = "/regist", method = RequestMethod.GET)
-    public String getRegistPage(Model model){
+    public String getRegistPage(Model model) {
         model.addAttribute("message", "Register page");
         return "register";
     }
 
 
     @RequestMapping(value = "/regist", method = RequestMethod.POST)
-    public String registNewUser(@ModelAttribute("userRegistDTO") UserRegistDTO userRegistDTO){
-        registerService.addRegisterUser(userRegistDTO);
-        return "index";
+    public String registNewUser(@ModelAttribute("userRegistDTO") UserRegistDTO userRegistDTO) {
+        try {
+            registerService.addRegisterUser(userRegistDTO);
+            return "redirect:/";
+        }catch (NullPointerException | NumberFormatException e){
+            return "redirect:/errorLogin";
+        }
     }
+
 }

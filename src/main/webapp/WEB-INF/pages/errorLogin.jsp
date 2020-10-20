@@ -4,9 +4,9 @@
     <title></title>
 </head>
 <body>
-<%--<h1>Sorry, access denied!!</h1>--%>
-<h1>${errorMessage}</h1>
+<h1>Invalid inputted data!</h1>
 <div style="width: 100%; height: 100%"><img src="../resources/block.jpg">
-    <a href = "personal">Personal Cabinet</a></div>
+    <a href = "/">Back</a></div>
 </body>
 </html>
+

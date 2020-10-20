@@ -17,7 +17,7 @@
 </c:forEach>
 <c:choose>
     <c:when test="${role == 'ROLE_USER'}">
-        <a href="/tomcat_spring_app_war/details">More details</a>
+        <a href="/details">More details</a>
         <br />
     </c:when>
     <c:otherwise>
@@ -25,7 +25,7 @@
                 <form:form method="POST" action="deleteUser">
                     <div class="container" align="left">
                         <label>Enter ID</label>
-                        <input type="text" name="userId"/>
+                        <input type="number" name="userId" required/>
 
                         <button type="submit">Delete User</button>
                     </div>
