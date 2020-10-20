@@ -6,6 +6,7 @@ import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
 import com.springapp.mvc.service.AuthenticationService;
+import com.springapp.mvc.service.RegisterService;
 import com.springapp.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.jws.WebParam;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RegisterService registerService;
 
     @Autowired
     private AuthenticationService authenticationService;
@@ -67,6 +72,7 @@ public class UserController {
         model.addAttribute("users", listOfUsers);
         model.addAttribute("title", "Personal Cabinet");
         model.addAttribute("message", "Personal data:");
+        model.addAttribute("userRole", userService.getRegisterUserRole(loggedUser));
         return "personalCab";
     }
 
@@ -75,4 +81,13 @@ public class UserController {
         model.addAttribute("errorMessage", "Invalid Details");
         return "error";
     }
+
+    @RequestMapping(value = "/moreDetails", method = RequestMethod.GET)
+    public String showMoreDetails (Model model) {
+
+        model.addAttribute("userInfo", userService.getAllDetailsFromUser(loggedUser));
+        return "moreDetails";
+    }
+
+
 }

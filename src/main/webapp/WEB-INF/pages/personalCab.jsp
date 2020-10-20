@@ -16,5 +16,12 @@
     <p>First Name: ${user.firstName} | Last Name: ${user.lastName} </p>
 </c:forEach>
 
+<c:choose>
+    <c:when test="${userRole == 'ROLE_USER'}">
+        <a href="moreDetails" />More details</a>
+    </c:when>
+</c:choose>
+
+
 </body>
 </html>

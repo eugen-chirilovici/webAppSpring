@@ -16,7 +16,7 @@ public class CredentialsDAO {
     private static long id = 0L;
 
     static {
-        listOfCredentials.add(new Credentials(id++, "echirilovici", "test", RoleType.ROLE_ADMIN));
+        listOfCredentials.add(new Credentials(id++, "ipopovici", "test", RoleType.ROLE_ADMIN));
         listOfCredentials.add(new Credentials(id++, "cnicuta", "test", RoleType.ROLE_USER));
         listOfCredentials.add(new Credentials(id++, "frosca", "test", RoleType.ROLE_USER));
     }
@@ -34,4 +34,12 @@ public class CredentialsDAO {
                 .collect(Collectors.toList());
     }
 
+    public Credentials findById(Long credentialsId) {
+        for (Credentials credentials : listOfCredentials) {
+            if (credentials.getId() == credentialsId) {
+                return credentials;
+            }
+        }
+        return null;
+    }
 }

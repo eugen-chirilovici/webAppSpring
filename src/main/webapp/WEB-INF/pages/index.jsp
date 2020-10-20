@@ -9,12 +9,12 @@
     </style>
 </head>
 <body>
-<h6>${message}</h6>
+<h4>${message}</h4>
 <div align="center">
     <div style="width: 300px; height: 500px;">
         <form:form method="POST" action="login">
             <div class="imgcontainer">
-                <img src="../resources/incognito.jpg" alt="Avatar" class="avatar">
+                <img src="resources/incognito.jpg" alt="Avatar" class="avatar">
             </div>
             <h3 align="center" style="color:maroon;">Hi there! Log in, please</h3>
 
