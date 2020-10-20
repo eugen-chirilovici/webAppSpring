@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.rmi.NoSuchObjectException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,22 +40,25 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String submit(@ModelAttribute("credentials") CredentialsDTO credentials) {
-
-        Credentials userCredentials = authenticationService.confirmAuthentication(credentials);
-        loggedUser = userService.getUserByCredentials(userCredentials);
-
-        if (loggedUser != null) {
-            if (userCredentials.getRole().equals(RoleType.ROLE_ADMIN)) {
-                return "redirect:/allusers";
-            } else if (userCredentials.getRole().equals(RoleType.ROLE_USER)) {
-                return "redirect:/personal";
+        try {
+            Credentials userCredentials = authenticationService.confirmAuthentication(credentials);
+            loggedUser = userService.getUserByCredentials(userCredentials);
+            if (loggedUser != null) {
+                if (userCredentials.getRole().equals(RoleType.ROLE_ADMIN)) {
+                    return "redirect:/allusers";
+                } else if (userCredentials.getRole().equals(RoleType.ROLE_USER)) {
+                    return "redirect:/personal";
+                }
             }
+        } catch (NullPointerException e) {
+            return "errorLogin";
         }
-        return "redirect:/error";
+        return "errorLogin";
     }
 
     @RequestMapping(value = "/allusers", method = RequestMethod.GET)
     public String showAllUsers(Model model) {
+
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("title", "Admin Panel");
         model.addAttribute("message", "Here are all our users:");
@@ -69,7 +73,7 @@ public class UserController {
         model.addAttribute("users", listOfUsers);
         model.addAttribute("title", "Personal Cabinet");
         model.addAttribute("message", "Personal data:");
-        model.addAttribute("role",authenticationService.getCredentialsDAO(loggedUser.getUserId()).getRole().toString());
+        model.addAttribute("role", authenticationService.getCredentialsDAO(loggedUser.getUserId()).getRole().toString());
         return "personalCab";
     }
 
@@ -79,8 +83,8 @@ public class UserController {
         return "error";
     }
 
-    @RequestMapping(value = "/details",method = RequestMethod.GET)
-    public String showDetails(Model model){
+    @RequestMapping(value = "/details", method = RequestMethod.GET)
+    public String showDetails(Model model) {
         List<UserDTO> listOfUsers = new ArrayList<>();
         listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
 
@@ -91,11 +95,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
-    public String optionToDelete(@ModelAttribute("userDTO") UserDTO userDTO){
-        if(Long.valueOf(userDTO.getUserId()).equals(loggedUser.getUserId())){
+    public String optionToDelete(@ModelAttribute("userDTO") UserDTO userDTO) throws NullPointerException {
+        try {
+            if (Long.valueOf(userDTO.getUserId()).equals(loggedUser.getUserId())) {
+                throw new NullPointerException();
+            }
+            if (Long.parseLong(userDTO.getUserId()) > userService.getAllUsers().size()) {
+                throw new IndexOutOfBoundsException();
+            }
+            userService.deleteUserById(Integer.valueOf(userDTO.getUserId()));
+            return "redirect:/allusers";
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
             return "redirect:/error";
         }
-        userService.deleteUserById(Integer.valueOf(userDTO.getUserId()));
-        return "redirect:/allusers";
+
     }
 }

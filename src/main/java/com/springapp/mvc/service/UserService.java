@@ -21,23 +21,23 @@ public class UserService {
 
     public List<UserDTO> getAllUsers() {
         return UsersDAO.getListOfUsers().stream()
-                       .map(Converter.convertFromUserToUserDTO)
-                       .collect(Collectors.toList());
+                .map(Converter.convertFromUserToUserDTO)
+                .collect(Collectors.toList());
     }
 
     public UserDTO getUserById(Long userId) {
         return Converter.convertFromUserToUserDTO.apply(usersDAO.findUserById(userId));
     }
 
-    public void deleteUserById(Integer userID){
+    public void deleteUserById(Integer userID) {
         usersDAO.deleteUser(userID);
     }
 
-    public User getUserByCredentials(Credentials userCredentials) {
+    public User getUserByCredentials(Credentials userCredentials) throws NullPointerException {
         List<User> userByCredentialsId = usersDAO.findUserByCredentialsId(userCredentials.getId());
-        if (!userByCredentialsId.isEmpty() && userByCredentialsId.size() == 1) {
-            return userByCredentialsId.get(0);
-        }
+            if (!userByCredentialsId.isEmpty() && userByCredentialsId.size() == 1) {
+                return userByCredentialsId.get(0);
+            }
         return null;
     }
 }

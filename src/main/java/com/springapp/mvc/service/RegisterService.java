@@ -8,6 +8,7 @@ import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 @Service
 public class RegisterService {

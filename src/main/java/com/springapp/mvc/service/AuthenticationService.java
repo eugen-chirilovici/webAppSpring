@@ -14,7 +14,7 @@ public class AuthenticationService {
     @Autowired
     private CredentialsDAO credentialsDAO;
 
-    public Credentials confirmAuthentication(CredentialsDTO credentials) {
+    public Credentials confirmAuthentication(CredentialsDTO credentials) throws NullPointerException {
         List<Credentials> userCredentials = credentialsDAO.validateUser(credentials);
         if (!userCredentials.isEmpty() && userCredentials.size() == 1) {
             return userCredentials.get(0);
