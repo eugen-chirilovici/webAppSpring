@@ -13,6 +13,8 @@ public class Converter {
         userDTO.setCredentialsId(user.getCredentialsId().toString());
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
+        userDTO.setAge(String.valueOf(user.getAge()));
+        userDTO.setZodiacSign(String.valueOf(user.getZodiacSign()));
         return userDTO;
     };
 

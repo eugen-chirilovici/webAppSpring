@@ -26,6 +26,9 @@ public class CredentialsDAO {
         listOfCredentials.add(new Credentials(credentialsId, credentials.getLogin(), credentials.getPassword(), roleType));
         return credentialsId;
     }
+    public Credentials getCredentials(int id){
+        return listOfCredentials.get(id);
+    }
 
     public List<Credentials> validateUser(CredentialsDTO credentials) {
         return listOfCredentials.stream()

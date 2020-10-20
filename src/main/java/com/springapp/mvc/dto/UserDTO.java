@@ -5,6 +5,8 @@ public class UserDTO {
     private String firstName;
     private String lastName;
     private String credentialsId;
+    private String age;
+    private String zodiacSign;
 
     public String getUserId() {
         return userId;
@@ -38,4 +40,11 @@ public class UserDTO {
         this.credentialsId = credentialsId;
     }
 
+    public String getAge() { return age; }
+
+    public void setAge(String age) { this.age = age; }
+
+    public String getZodiacSign() { return zodiacSign; }
+
+    public void setZodiacSign(String zodiacSign) { this.zodiacSign = zodiacSign; }
 }

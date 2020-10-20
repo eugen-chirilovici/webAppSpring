@@ -13,16 +13,8 @@
 <br>
 <h2>${message}</h2>
 <c:forEach items="${users}" var="user">
-    <p>First Name: ${user.firstName} | Last Name: ${user.lastName} </p>
+    <p>First Name: ${user.firstName} | Last Name: ${user.lastName} | Age: ${user.age} | Zodiac Sign: ${user.zodiacSign} } </p>
 </c:forEach>
-<c:choose>
-    <c:when test="${role =='ROLE_USER'}">
-        <a href="/more_details">more details</a>
-        <br />
-    </c:when>
-</c:choose>
-
-
 
 </body>
 </html>

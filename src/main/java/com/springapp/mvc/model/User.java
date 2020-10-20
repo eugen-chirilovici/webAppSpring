@@ -5,18 +5,24 @@ public class User {
     private String firstName;
     private String lastName;
     private Long credentialsId;
+    private int age;
+    private String zodiacSign;
 
-    public User(String firstName, String lastName, Long credentialsId) {
+    public User(String firstName, String lastName, Long credentialsId,int age, String zodiacSign) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.credentialsId = credentialsId;
+        this.age=age;
+        this.zodiacSign=zodiacSign;
     }
 
-    public User(Long userId, String firstName, String lastName, Long credentialsId) {
+    public User(Long userId, String firstName, String lastName, Long credentialsId,int age, String zodiacSign) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.credentialsId = credentialsId;
+        this.age=age;
+        this.zodiacSign=zodiacSign;
     }
 
     public Long getUserId() {
@@ -50,4 +56,12 @@ public class User {
     public void setCredentialsId(Long credentialsId) {
         this.credentialsId = credentialsId;
     }
+
+    public int getAge() { return age; }
+
+    public void setAge(int age) { this.age = age; }
+
+    public String getZodiacSign() { return zodiacSign; }
+
+    public void setZodiacSign(String zodiacSign) { this.zodiacSign = zodiacSign; }
 }
