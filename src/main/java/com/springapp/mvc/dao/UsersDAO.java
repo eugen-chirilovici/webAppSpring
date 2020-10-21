@@ -53,6 +53,6 @@ public class UsersDAO {
 
     public void deleteUserById (long userId) {
 
-        listOfUsers.remove((int)userId);
+        listOfUsers.removeIf(user -> user.getUserId() == userId);
     }
 }
