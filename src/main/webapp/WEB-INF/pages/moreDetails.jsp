@@ -20,12 +20,15 @@
 
 <c:choose>
     <c:when test="${role == 'ROLE_ADMIN'}">
+        <form:form method="POST" action="more" target = "_blank">
         <c:forEach items="${users}" var="user">
             <p>User Id: ${user.userId} | First Name: ${user.firstName} | Last Name: ${user.lastName}
-                | Phone: ${user.phone} | Role: ${user.role}
+                | Phone: ${user.phone} | Role: ${user.role} <input type = "checkbox" name = "selectedTasks" value="${user.userId}"/>
             </p>
             <br>
         </c:forEach>
+            <input type = "submit" value = "Delete" />
+        </form:form>
     </c:when>
     <c:otherwise>
         <ul>

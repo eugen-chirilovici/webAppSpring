@@ -7,6 +7,7 @@ import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
 import com.springapp.mvc.service.AuthenticationService;
 import com.springapp.mvc.service.UserService;
+import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    private boolean invalidData = false;
+
     @Autowired
     private AuthenticationService authenticationService;
 
@@ -32,6 +37,10 @@ public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
         model.addAttribute("message", "Hi there! Please, log in if you want to access our page");
+        if(invalidData){
+            model.addAttribute("error","Invalid Password or Username");
+            invalidData = false;
+        }
         return "index";
     }
 
@@ -39,6 +48,15 @@ public class UserController {
     public String submit(@ModelAttribute("credentials") CredentialsDTO credentials) {
 
         Credentials userCredentials = authenticationService.confirmAuthentication(credentials);
+
+        try {
+            if(userCredentials.getLogin().isEmpty())throw new NullPointerException();
+        }catch (NullPointerException e){
+            e.printStackTrace();
+            invalidData = true;
+            return "redirect:/";
+        }
+
         loggedUser = userService.getUserByCredentials(userCredentials);
 
         if (loggedUser != null) {
@@ -87,5 +105,18 @@ public class UserController {
             model.addAttribute("phone", loggedUser.getPhoneNumber());
         }
         return "moreDetails";
+    }
+
+    @RequestMapping(value = "personal/more", method = RequestMethod.POST)
+    public String deleteUser(@RequestParam String[] selectedTasks){
+        if(selectedTasks == null)return "error";
+        for(String id : selectedTasks) {
+            try {
+                userService.deleteUser(Long.parseLong(id));
+            } catch (ConversionNotSupportedException e) {
+                e.printStackTrace();
+            }
+        }
+        return "redirect:/personal/more";
     }
 }

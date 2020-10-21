@@ -47,4 +47,8 @@ public class UsersDAO {
                     .filter(t -> t.getCredentialsId().equals(credentialsId))
                     .collect(Collectors.toList());
     }
+
+    public void deleteUser(User user){
+        listOfUsers.remove(user);
+    }
 }

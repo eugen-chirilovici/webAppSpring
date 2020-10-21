@@ -38,4 +38,6 @@ public class CredentialsDAO {
         return  listOfCredentials.stream().filter(e -> e.getId() == id).findFirst().get().getRole();
     }
 
+
+
 }

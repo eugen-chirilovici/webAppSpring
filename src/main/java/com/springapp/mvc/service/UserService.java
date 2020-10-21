@@ -58,4 +58,8 @@ public class UserService {
         return list;
     }
 
+    public void deleteUser(long id){
+        usersDAO.deleteUser(usersDAO.findUserById(id));
+    }
+
 }

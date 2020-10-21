@@ -17,7 +17,7 @@
                 <img src="../resources/incognito.jpg" alt="Avatar" class="avatar">
             </div>
             <h3 align="center" style="color:maroon;">Hi there! Log in, please</h3>
-
+            <h2>${error}</h2>
             <div class="container" align="left">
                 <label>Login</label>
                 <input type="text" name="login" required="required"/>
