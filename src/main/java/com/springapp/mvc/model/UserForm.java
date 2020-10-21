@@ -19,4 +19,5 @@ public class UserForm {
     public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
     }
+
 }

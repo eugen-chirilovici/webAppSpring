@@ -42,11 +42,7 @@ public class UserController {
         loggedUser = userService.getUserByCredentials(userCredentials);
 
         if (loggedUser != null) {
-            if (userCredentials.getRole().equals(RoleType.ROLE_ADMIN)) {
-                return "redirect:/allusers";
-            } else if (userCredentials.getRole().equals(RoleType.ROLE_USER)) {
                 return "redirect:/personal";
-            }
         }
         return "redirect:/error";
     }
@@ -74,5 +70,22 @@ public class UserController {
     public String errorConnection(ModelMap model) {
         model.addAttribute("errorMessage", "Invalid Details");
         return "error";
+    }
+
+    @RequestMapping(value = "personal/more", method = RequestMethod.GET)
+    public String moreDetails(ModelMap model) {
+
+        RoleType loggedUserRole = authenticationService.getCredentialsDAO().getRoleByUserId(loggedUser.getCredentialsId());
+        model.addAttribute("role", loggedUserRole.toString());
+        if (loggedUser == null) return "error";
+        if (loggedUserRole == RoleType.ROLE_ADMIN) {
+            model.addAttribute("users", userService.getUserDTOwithRole());
+        } else {
+            model.addAttribute("id", loggedUser.getUserId());
+            model.addAttribute("firstName", loggedUser.getFirstName());
+            model.addAttribute("lastName", loggedUser.getLastName());
+            model.addAttribute("phone", loggedUser.getPhoneNumber());
+        }
+        return "moreDetails";
     }
 }

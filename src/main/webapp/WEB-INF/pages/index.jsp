@@ -26,7 +26,7 @@
                 <input type="password" name="password" required="required"/>
 
                 <button type="submit">Login</button>
-                <a href="/regist">Register</a>
+                <a href="${pageContext.request.contextPath}/regist">Register</a>
             </div>
         </form:form>
     </div>

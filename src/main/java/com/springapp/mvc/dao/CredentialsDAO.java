@@ -34,4 +34,8 @@ public class CredentialsDAO {
                 .collect(Collectors.toList());
     }
 
+    public RoleType getRoleByUserId(long id){
+        return  listOfCredentials.stream().filter(e -> e.getId() == id).findFirst().get().getRole();
+    }
+
 }

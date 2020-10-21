@@ -16,5 +16,7 @@
     <p>First Name: ${user.firstName} | Last Name: ${user.lastName} </p>
 </c:forEach>
 
+<a href="personal/more">More</a>
+
 </body>
 </html>

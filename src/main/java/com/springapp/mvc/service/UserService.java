@@ -1,11 +1,15 @@
 package com.springapp.mvc.service;
 
+
 import com.springapp.mvc.dao.UsersDAO;
 import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
+import com.springapp.mvc.model.UserForm;
+import com.springapp.mvc.model.enums.RoleType;
 import com.springapp.mvc.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +21,13 @@ public class UserService {
     @Autowired
     private UsersDAO usersDAO;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
     public List<UserDTO> getAllUsers() {
         return UsersDAO.getListOfUsers().stream()
-                       .map(Converter.convertFromUserToUserDTO)
-                       .collect(Collectors.toList());
+                .map(Converter.convertFromUserToUserDTO)
+                .collect(Collectors.toList());
     }
 
     public UserDTO getUserById(Long userId) {
@@ -34,4 +41,21 @@ public class UserService {
         }
         return null;
     }
+
+    public List<UserDTO> getUserDTOwithRole() {
+
+        List<UserDTO> list = UsersDAO.getListOfUsers().stream()
+                .map(Converter.convertFromUserToUserDTO)
+                .collect(Collectors.toList());
+
+        for (User user : UsersDAO.getListOfUsers()) {
+            RoleType role = authenticationService.getCredentialsDAO().getRoleByUserId(user.getUserId());
+            for(UserDTO userDTO:list){
+                if(userDTO.getUserId().equals(user.getUserId().toString()))
+                    userDTO.setRole(role.toString());
+            }
+        }
+        return list;
+    }
+
 }

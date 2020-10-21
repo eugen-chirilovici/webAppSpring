@@ -5,12 +5,14 @@ public class User {
     private String firstName;
     private String lastName;
     private Long credentialsId;
+    private String phoneNumber = "None";
 
     public User(String firstName, String lastName, Long credentialsId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.credentialsId = credentialsId;
     }
+
 
     public User(Long userId, String firstName, String lastName, Long credentialsId) {
         this.userId = userId;
@@ -49,5 +51,17 @@ public class User {
 
     public void setCredentialsId(Long credentialsId) {
         this.credentialsId = credentialsId;
+    }
+
+    public void addPhone(String nr){
+        this.phoneNumber = nr;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public User getUser(){
+        return this;
     }
 }
