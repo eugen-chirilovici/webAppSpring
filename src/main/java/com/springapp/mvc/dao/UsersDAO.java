@@ -51,17 +51,8 @@ public class UsersDAO {
                     .collect(Collectors.toList());
     }
 
-    public UserDetailsDTO getAllDetailsFromUserClass(User user) {
-        UserDetailsDTO userDetailsDTO = new UserDetailsDTO();
+    public void deleteUserById (long userId) {
 
-        userDetailsDTO.setUserId(String.valueOf(user.getUserId()));
-        userDetailsDTO.setFirstName(user.getFirstName());
-        userDetailsDTO.setLastName(user.getLastName());
-        userDetailsDTO.setCredentialsId(String.valueOf(user.getCredentialsId()));
-        userDetailsDTO.setAge(String.valueOf(user.getAge()));
-        userDetailsDTO.setChildren(String.valueOf(user.getChildren()));
-        userDetailsDTO.setJob(user.getJob());
-
-        return userDetailsDTO;
+        listOfUsers.remove((int)userId);
     }
 }

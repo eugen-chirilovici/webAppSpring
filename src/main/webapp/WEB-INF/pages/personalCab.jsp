@@ -20,6 +20,13 @@
     <c:when test="${userRole == 'ROLE_USER'}">
         <a href="moreDetails" />More details</a>
     </c:when>
+    <c:otherwise>
+        <form:form method="POST" action="deleteUser">
+            <label>User ID</label>
+            <input type="number" placeholder="User ID" name="userId">
+            <button type="submit">Submit</button>
+        </form:form>
+    </c:otherwise>
 </c:choose>
 
 

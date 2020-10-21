@@ -2,6 +2,7 @@ package com.springapp.mvc.controller;
 
 import com.springapp.mvc.dto.CredentialsDTO;
 import com.springapp.mvc.dto.UserDTO;
+import com.springapp.mvc.dto.UserIdDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
@@ -15,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.jws.WebParam;
 import java.util.ArrayList;
@@ -84,9 +86,16 @@ public class UserController {
 
     @RequestMapping(value = "/moreDetails", method = RequestMethod.GET)
     public String showMoreDetails (Model model) {
-
         model.addAttribute("userInfo", userService.getAllDetailsFromUser(loggedUser));
         return "moreDetails";
+    }
+
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    public String deleteUserById(@ModelAttribute("userId") UserIdDTO userIdDTO) {
+
+        userService.deleteUser(userIdDTO);
+
+        return "redirect:/allusers";
     }
 
 

@@ -16,5 +16,7 @@
     <p>User Id: ${user.userId} | First Name: ${user.firstName} | Last Name: ${user.lastName}</p>
 </c:forEach>
 
+<a href="personal" />Personal Cabinet</a>
+
 </body>
 </html>
