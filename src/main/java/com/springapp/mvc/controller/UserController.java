@@ -60,22 +60,29 @@ public class UserController {
 
     @RequestMapping(value = "/allusers", method = RequestMethod.GET)
     public String showAllUsers(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("title", "Admin Panel");
-        model.addAttribute("message", "Here are all our users:");
-        return "welcome";
+        if (loggedUser != null) {
+            model.addAttribute("users", userService.getAllUsers());
+            model.addAttribute("title", "Admin Panel");
+            model.addAttribute("message", "Here are all our users:");
+            return "welcome";
+        }
+        return "error";
     }
 
     @RequestMapping(value = "/personal", method = RequestMethod.GET)
     public String showPersonalData(Model model) {
-        List<UserDTO> listOfUsers = new ArrayList<>();
-        listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
 
-        model.addAttribute("users", listOfUsers);
-        model.addAttribute("title", "Personal Cabinet");
-        model.addAttribute("message", "Personal data:");
-        model.addAttribute("userRole", userService.getRegisterUserRole(loggedUser));
-        return "personalCab";
+        if (loggedUser != null) {
+            List<UserDTO> listOfUsers = new ArrayList<>();
+            listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
+
+            model.addAttribute("users", listOfUsers);
+            model.addAttribute("title", "Personal Cabinet");
+            model.addAttribute("message", "Personal data:");
+            model.addAttribute("userRole", userService.getRegisterUserRole(loggedUser));
+            return "personalCab";
+        }
+        return "error";
     }
 
     @RequestMapping(value = "/error", method = RequestMethod.GET)
@@ -86,17 +93,16 @@ public class UserController {
 
     @RequestMapping(value = "/moreDetails", method = RequestMethod.GET)
     public String showMoreDetails (Model model) {
-        model.addAttribute("userInfo", userService.getAllDetailsFromUser(loggedUser));
-        return "moreDetails";
+        if (loggedUser != null) {
+            model.addAttribute("userInfo", userService.getAllDetailsFromUser(loggedUser));
+            return "moreDetails";
+        }
+        return "error";
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     public String deleteUserById(@ModelAttribute("userId") UserIdDTO userIdDTO) {
-
         userService.deleteUser(userIdDTO);
-
         return "redirect:/allusers";
     }
-
-
 }
