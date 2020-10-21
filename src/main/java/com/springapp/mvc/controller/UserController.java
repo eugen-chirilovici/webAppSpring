@@ -67,7 +67,19 @@ public class UserController {
         model.addAttribute("users", listOfUsers);
         model.addAttribute("title", "Personal Cabinet");
         model.addAttribute("message", "Personal data:");
+        model.addAttribute("userole",authenticationService.getCredentials(loggedUser.getUserId()).getRole().toString());
         return "personalCab";
+    }
+
+    @RequestMapping(value = "/moredetails", method = RequestMethod.GET)
+    public String showMoreDetails(Model model) {
+        List<UserDTO> listOfUsers = new ArrayList<>();
+        listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
+
+        model.addAttribute("users", listOfUsers);
+        model.addAttribute("title", "More Details");
+        model.addAttribute("message", "More Details Data");
+        return "moredetails";
     }
 
     @RequestMapping(value = "/error", method = RequestMethod.GET)

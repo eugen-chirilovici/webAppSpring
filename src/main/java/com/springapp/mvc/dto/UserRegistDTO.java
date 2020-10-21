@@ -6,6 +6,8 @@ public class UserRegistDTO {
     private String lastName;
     private String login;
     private String password;
+    private String gender;
+    private String email;
 
     public String getFirstName() {
         return firstName;
@@ -37,5 +39,21 @@ public class UserRegistDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

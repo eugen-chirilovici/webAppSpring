@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -13,16 +14,8 @@
 <br>
 <h2>${message}</h2>
 <c:forEach items="${users}" var="user">
-    <p>First Name: ${user.firstName} | Last Name: ${user.lastName} </p>
+    <p>First Name: ${user.firstName} | Last Name: ${user.lastName} | Gender: ${user.gender} | Email: ${user.email} </p>
 </c:forEach>
-
-<c:choose>
-    <c:when test="${userole == 'ROLE_USER'}">
-        <a href="/moredetails">For more details TAP HERE
-        </a>
-        <br />
-    </c:when>
-</c:choose>
 
 </body>
 </html>

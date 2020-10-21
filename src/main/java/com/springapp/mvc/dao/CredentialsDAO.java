@@ -34,4 +34,8 @@ public class CredentialsDAO {
                 .collect(Collectors.toList());
     }
 
+    public Credentials getCredentials(int a) {
+        return listOfCredentials.get(a);
+    }
+
 }

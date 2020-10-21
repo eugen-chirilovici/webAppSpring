@@ -22,8 +22,8 @@ public class AuthenticationService {
         return null;
     }
 
-    public CredentialsDAO getCredentialsDAO() {
-        return credentialsDAO;
+    public Credentials getCredentials(long a) {
+        return credentialsDAO.getCredentials( (int) a);
     }
 
     public void setCredentialsDAO(CredentialsDAO credentialsDAO) {
