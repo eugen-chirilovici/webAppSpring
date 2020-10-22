@@ -6,14 +6,10 @@ import org.springframework.validation.annotation.Validated;
 
 public class User {
     private Long userId;
-    @NotNull
     private String firstName;
-    @NotNull
     private String lastName;
     private Long credentialsId;
-    @NotNull
     private String hobby;
-    @NotNull
     private int age;
 
     public User(String firstName, String lastName, Long credentialsId, String hobby, int age) {
