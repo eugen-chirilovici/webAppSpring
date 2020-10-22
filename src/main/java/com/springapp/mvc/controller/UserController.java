@@ -67,6 +67,7 @@ public class UserController {
         model.addAttribute("users", listOfUsers);
         model.addAttribute("title", "Personal Cabinet");
         model.addAttribute("message", "Personal data:");
+        model.addAttribute("userole", userService.getCredentialsById(loggedUser.getCredentialsId()).getRole().toString());
         return "personalCab";
     }
 
@@ -74,5 +75,16 @@ public class UserController {
     public String errorConnection(ModelMap model) {
         model.addAttribute("errorMessage", "Invalid Details");
         return "error";
+    }
+
+    @RequestMapping(value = "/moredetails", method = RequestMethod.GET)
+    public String showMoreDetails(Model model) {
+        List<UserDTO> listOfUsers = new ArrayList<>();
+        listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
+
+        model.addAttribute("users", listOfUsers);
+        model.addAttribute("title", "More Details");
+        model.addAttribute("message", "More Details Data");
+        return "moredetails";
     }
 }
