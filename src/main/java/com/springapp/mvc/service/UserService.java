@@ -19,8 +19,8 @@ public class UserService {
 
     public List<UserDTO> getAllUsers() {
         return UsersDAO.getListOfUsers().stream()
-                       .map(Converter.convertFromUserToUserDTO)
-                       .collect(Collectors.toList());
+                .map(Converter.convertFromUserToUserDTO)
+                .collect(Collectors.toList());
     }
 
     public UserDTO getUserById(Long userId) {
@@ -33,5 +33,9 @@ public class UserService {
             return userByCredentialsId.get(0);
         }
         return null;
+    }
+
+    public void deleteUser(int id) {
+        usersDAO.deleteUser(id);
     }
 }

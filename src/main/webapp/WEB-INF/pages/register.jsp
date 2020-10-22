@@ -30,6 +30,12 @@
                 <label>Password</label>
                 <input type="password" placeholder="Enter Password" name="password" required>
 
+                <label>Gender</label>
+                <input type="text" placeholder="Enter Gender" name="gender" required>
+
+                <label>Email</label>
+                <input type="text" placeholder="Enter Email" name="email" required>
+
                     <%--<label>Repeat Password</label>--%>
                     <%--<input type="password" placeholder="Repeat Password" name="psw-repeat" required>--%>
                     <%--<hr>--%>

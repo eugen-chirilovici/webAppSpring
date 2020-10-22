@@ -2,6 +2,7 @@ package com.springapp.mvc.controller;
 
 import com.springapp.mvc.dto.CredentialsDTO;
 import com.springapp.mvc.dto.UserDTO;
+import com.springapp.mvc.dto.UserRegistDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
@@ -38,16 +39,19 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String submit(@ModelAttribute("credentials") CredentialsDTO credentials) {
 
-        Credentials userCredentials = authenticationService.confirmAuthentication(credentials);
-        loggedUser = userService.getUserByCredentials(userCredentials);
+        try {
+            Credentials userCredentials = authenticationService.confirmAuthentication(credentials);
+            loggedUser = userService.getUserByCredentials(userCredentials);
 
-        if (loggedUser != null) {
-            if (userCredentials.getRole().equals(RoleType.ROLE_ADMIN)) {
-                return "redirect:/allusers";
-            } else if (userCredentials.getRole().equals(RoleType.ROLE_USER)) {
-                return "redirect:/personal";
+            if (loggedUser != null) {
+                if (userCredentials.getRole().equals(RoleType.ROLE_ADMIN)) {
+                    return "redirect:/allusers";
+                } else if (userCredentials.getRole().equals(RoleType.ROLE_USER)) {
+                    return "redirect:/personal";
+                }
             }
-        }
+        } catch (NullPointerException e) {
+    }
         return "redirect:/error";
     }
 
@@ -67,7 +71,7 @@ public class UserController {
         model.addAttribute("users", listOfUsers);
         model.addAttribute("title", "Personal Cabinet");
         model.addAttribute("message", "Personal data:");
-        model.addAttribute("userole",authenticationService.getCredentials(loggedUser.getUserId()).getRole().toString());
+        model.addAttribute("userole", authenticationService.getCredentials(loggedUser.getUserId()).getRole().toString());
         return "personalCab";
     }
 
@@ -86,5 +90,11 @@ public class UserController {
     public String errorConnection(ModelMap model) {
         model.addAttribute("errorMessage", "Invalid Details");
         return "error";
+    }
+
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    public String deleteUser(@ModelAttribute("userDTO") UserDTO userDTO) {
+        userService.deleteUser(Integer.valueOf(userDTO.getUserId()));
+        return "redirect:/allusers";
     }
 }
