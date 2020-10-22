@@ -26,7 +26,7 @@ public class CredentialsDAO {
         listOfCredentials.add(new Credentials(credentialsId, credentials.getLogin(), credentials.getPassword(), roleType));
         return credentialsId;
     }
-    public Credentials getCredentials(int id){
+    public Credentials getCredentialsByID(int id){
         return listOfCredentials.get(id);
     }
 

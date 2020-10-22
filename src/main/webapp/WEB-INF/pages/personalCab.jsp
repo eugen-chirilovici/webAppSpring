@@ -18,10 +18,20 @@
 <c:choose>
     <c:when test="${role =='ROLE_USER'}">
         <a href="/more_details">more details</a>
-        <br />
+        <br/>
     </c:when>
 </c:choose>
 
+<c:choose>
+    <c:when test="${role =='ROLE_ADMIN'}">
+        <form:form method="POST" action="deleteUser">
+            <div class="container">
+                <input type="number" name="userId",required/>
+                <button type="submit" >Delete Users</button>
+            </div>
+        </form:form>
+    </c:when>
+</c:choose>
 
 
 </body>

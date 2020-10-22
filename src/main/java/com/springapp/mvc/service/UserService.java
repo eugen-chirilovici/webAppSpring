@@ -19,13 +19,14 @@ public class UserService {
 
     public List<UserDTO> getAllUsers() {
         return UsersDAO.getListOfUsers().stream()
-                       .map(Converter.convertFromUserToUserDTO)
-                       .collect(Collectors.toList());
+                .map(Converter.convertFromUserToUserDTO)
+                .collect(Collectors.toList());
     }
 
     public UserDTO getUserById(Long userId) {
         return Converter.convertFromUserToUserDTO.apply(usersDAO.findUserById(userId));
     }
+
 
     public User getUserByCredentials(Credentials userCredentials) {
         List<User> userByCredentialsId = usersDAO.findUserByCredentialsId(userCredentials.getId());
@@ -33,5 +34,10 @@ public class UserService {
             return userByCredentialsId.get(0);
         }
         return null;
+    }
+
+    public void deleteByUserID(int i) {
+        usersDAO.deleteUserByID(i);
+
     }
 }

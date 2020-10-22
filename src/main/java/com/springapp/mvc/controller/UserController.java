@@ -2,6 +2,7 @@ package com.springapp.mvc.controller;
 
 import com.springapp.mvc.dto.CredentialsDTO;
 import com.springapp.mvc.dto.UserDTO;
+import com.springapp.mvc.dto.UserRegistDTO;
 import com.springapp.mvc.model.Credentials;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
@@ -68,6 +69,7 @@ public class UserController {
         model.addAttribute("title", "Personal Cabinet");
         model.addAttribute("message", "Personal data:");
         model.addAttribute("role", authenticationService.getCredentials(loggedUser.getUserId()).getRole().toString());
+
         return "personalCab";
     }
 
@@ -87,4 +89,11 @@ public class UserController {
         model.addAttribute("errorMessage", "Invalid Details");
         return "error";
     }
+
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    public String deleteUser(@ModelAttribute("userDTO") UserDTO userDTO) {
+        userService.deleteByUserID(Integer.parseInt(userDTO.getUserId()));
+        return "redirect:/allusers";
+    }
+
 }

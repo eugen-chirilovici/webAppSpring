@@ -8,13 +8,14 @@
 <head>
     <title></title>
 </head>
-<body>
 <h1>${title}</h1>
 <br>
 <h2>${message}</h2>
 <c:forEach items="${users}" var="user">
     <p>User Id: ${user.userId} | First Name: ${user.firstName} | Last Name: ${user.lastName}</p>
 </c:forEach>
+<a href="/personal">Go to personal Cab</a>
+
 
 </body>
 </html>

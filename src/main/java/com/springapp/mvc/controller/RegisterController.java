@@ -27,4 +27,5 @@ public class RegisterController {
         registerService.addRegisterUser(userRegistDTO);
         return "index";
     }
+
 }

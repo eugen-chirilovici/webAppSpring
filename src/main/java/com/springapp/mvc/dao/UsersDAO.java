@@ -34,6 +34,10 @@ public class UsersDAO {
         }
         return null;
     }
+    public void deleteUserByID(int id){
+        if(listOfUsers.stream().anyMatch(it->it.getUserId()== id))
+            listOfUsers.remove(listOfUsers.stream().filter(it->it.getUserId()==id).findAny().get());
+    }
 
     public static List<User> getListOfUsers() {
         return listOfUsers;
