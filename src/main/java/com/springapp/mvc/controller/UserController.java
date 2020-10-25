@@ -87,4 +87,10 @@ public class UserController {
         model.addAttribute("message", "More Details Data");
         return "moredetails";
     }
+
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    public String deleteUser(@ModelAttribute("userDTO") UserDTO userDTO) {
+        userService.deleteUser(Integer.parseInt(userDTO.getUserId()));
+        return "redirect:/allusers";
+    }
 }

@@ -14,15 +14,20 @@ public class UsersDAO {
     private static List<User> listOfUsers = new ArrayList<>();
 
     static {
-        listOfUsers.add(new User(id++, "Eugen", "Chirilovici", 0L));
-        listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 1L));
-        listOfUsers.add(new User(id++, "Filip", "Rosca", 2L));
+        listOfUsers.add(new User(id++, "Eugen", "Chirilovici", 0L, "eugen.chirilovici@gmail.com", "25.09.1996" ));
+        listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 1L,"ciprina.nicuta@gmail.com", "07.04.1995"));
+        listOfUsers.add(new User(id++, "Filip", "Rosca", 2L, "filip.rosca@gmail.com", "02.02.1989"));
     }
 
     public Long addUser(User user) {
         long userId = id++;
-        listOfUsers.add(new User(userId, user.getFirstName(), user.getLastName(), user.getCredentialsId()));
+        listOfUsers.add(new User(userId, user.getFirstName(), user.getLastName(), user.getCredentialsId(), user.getEmail(), user.getBirthdate()));
         return userId;
+    }
+
+    public void deleteUser(int id) {
+        if (listOfUsers.stream().anyMatch(t -> t.getUserId() == id))
+            listOfUsers.remove(listOfUsers.stream().filter(t -> t.getUserId() == id).findAny().get());
     }
 
     public User findUserById(Long userId) {

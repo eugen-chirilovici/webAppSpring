@@ -1,5 +1,6 @@
 package com.springapp.mvc.service;
 
+import com.springapp.mvc.dao.CredentialsDAO;
 import com.springapp.mvc.dao.UsersDAO;
 import com.springapp.mvc.dto.UserDTO;
 import com.springapp.mvc.model.Credentials;
@@ -17,6 +18,9 @@ public class UserService {
     @Autowired
     private UsersDAO usersDAO;
 
+    @Autowired
+    private CredentialsDAO credentialsDAO;
+
     public List<UserDTO> getAllUsers() {
         return UsersDAO.getListOfUsers().stream()
                        .map(Converter.convertFromUserToUserDTO)
@@ -29,9 +33,18 @@ public class UserService {
 
     public User getUserByCredentials(Credentials userCredentials) {
         List<User> userByCredentialsId = usersDAO.findUserByCredentialsId(userCredentials.getId());
-        if (!userByCredentialsId.isEmpty() && userByCredentialsId.size() == 1) {
+        if (userByCredentialsId.size() == 1) {
             return userByCredentialsId.get(0);
         }
         return null;
     }
+
+    public Credentials getCredentialsById(Long credentialsId) {
+        return credentialsDAO.getCredentialsById(credentialsId);
+    }
+
+    public void deleteUser(int id) {
+        usersDAO.deleteUser(id);
+    }
+
 }

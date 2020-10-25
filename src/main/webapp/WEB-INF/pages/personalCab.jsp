@@ -16,5 +16,23 @@
     <p>First Name: ${user.firstName} | Last Name: ${user.lastName} </p>
 </c:forEach>
 
+<c:choose>
+    <c:when test="${userole == 'ROLE_USER'}">
+        <a href="/moredetails">more details</a>
+        <br />
+    </c:when>
+</c:choose>
+
+<c:choose>
+    <c:when test="${userole == 'ROLE_ADMIN'}">
+        <form:form method="POST" action="deleteUser">
+            <div class="container">
+                <input type="number" name="UserId" required/>
+                <button type="submit">Delete User</button>
+            </div>
+        </form:form>
+    </c:when>
+</c:choose>
+
 </body>
 </html>

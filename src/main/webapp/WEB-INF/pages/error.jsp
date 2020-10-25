@@ -6,6 +6,8 @@
 <body>
 <%--<h1>Sorry, access denied!!</h1>--%>
 <h1>${errorMessage}</h1>
-<div style="width: 100%; height: 100%"><img src="../resources/block.jpg"></div>
+<div style="width: 100%; height: 100%"><img src="../resources/block.jpg">
+    <a href="/">Go to Login Page </a>
+</div>
 </body>
 </html>

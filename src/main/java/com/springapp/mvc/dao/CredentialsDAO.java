@@ -34,4 +34,8 @@ public class CredentialsDAO {
                 .collect(Collectors.toList());
     }
 
+    public Credentials getCredentialsById(Long credentialsId) {
+        return listOfCredentials.stream().filter(t -> t.getId() == credentialsId).findFirst().orElse(null);
+    }
+
 }
