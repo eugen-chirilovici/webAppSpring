@@ -38,15 +38,19 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String submit(@ModelAttribute("credentials") CredentialsDTO credentials) {
 
-        Credentials userCredentials = authenticationService.confirmAuthentication(credentials);
-        loggedUser = userService.getUserByCredentials(userCredentials);
+        try {
+            Credentials userCredentials = authenticationService.confirmAuthentication(credentials);
+            loggedUser = userService.getUserByCredentials(userCredentials);
 
-        if (loggedUser != null) {
-            if (userCredentials.getRole().equals(RoleType.ROLE_ADMIN)) {
-                return "redirect:/allusers";
-            } else if (userCredentials.getRole().equals(RoleType.ROLE_USER)) {
-                return "redirect:/personal";
+            if (loggedUser != null) {
+                if (userCredentials.getRole().equals(RoleType.ROLE_ADMIN)) {
+                    return "redirect:/allusers";
+                } else if (userCredentials.getRole().equals(RoleType.ROLE_USER)) {
+                    return "redirect:/personal";
+                }
             }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         return "redirect:/error";
     }
