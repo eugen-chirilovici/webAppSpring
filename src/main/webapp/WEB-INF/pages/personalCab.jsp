@@ -16,5 +16,21 @@
     <p>First Name: ${user.firstName} | Last Name: ${user.lastName} </p>
 </c:forEach>
 
+
+<c:choose>
+    <c:when test="${role== '1'}">
+        <form:form action="delete" method="POST">
+        Delete user by id: <input name="id"/>
+            <input type="submit" value="Delete"/>
+
+        </form:form>
+    </c:when>
+    <c:otherwise>
+        <a href="/tomcat_spring_app_war/moreInformation">More information</a>
+        <br />
+    </c:otherwise>
+</c:choose>
+
+
 </body>
 </html>

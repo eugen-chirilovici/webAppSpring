@@ -7,6 +7,8 @@ public class UserRegistDTO {
     private String login;
     private String password;
 
+
+
     public String getFirstName() {
         return firstName;
     }

@@ -14,14 +14,17 @@ public class UsersDAO {
     private static List<User> listOfUsers = new ArrayList<>();
 
     static {
-        listOfUsers.add(new User(id++, "Eugen", "Chirilovici", 0L));
-        listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 1L));
-        listOfUsers.add(new User(id++, "Filip", "Rosca", 2L));
+        listOfUsers.add(new User(id++, "Eugen", "Chirilovici", 0L,52,false));
+        listOfUsers.add(new User(id++, "Ciprian", "Nicuta", 1L,23,false));
+        listOfUsers.add(new User(id++, "Filip", "Rosca", 2L,35,true));
+        listOfUsers.add(new User(id++, "Dmitri", "Sprinceac", 3L,25,false));
+        listOfUsers.add(new User(id++, "Dmitri", "Admin", 4L,25,true));
     }
 
     public Long addUser(User user) {
         long userId = id++;
-        listOfUsers.add(new User(userId, user.getFirstName(), user.getLastName(), user.getCredentialsId()));
+        listOfUsers.add(new User(userId, user.getFirstName(), user.getLastName(), user.getCredentialsId(),
+                user.getAge(),user.getMarried()));
         return userId;
     }
 
@@ -32,6 +35,12 @@ public class UsersDAO {
             }
         }
         return null;
+    }
+
+
+    public void removeUser(int id){
+
+        listOfUsers.remove(id);
     }
 
     public static List<User> getListOfUsers() {

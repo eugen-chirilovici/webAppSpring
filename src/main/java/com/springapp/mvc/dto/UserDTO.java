@@ -5,6 +5,8 @@ public class UserDTO {
     private String firstName;
     private String lastName;
     private String credentialsId;
+    private int age;
+    private boolean married;
 
     public String getUserId() {
         return userId;
@@ -37,5 +39,14 @@ public class UserDTO {
     public void setCredentialsId(final String credentialsId) {
         this.credentialsId = credentialsId;
     }
+
+    public int getAge() { return age;
+    }
+    public void setAge(int age) { this.age = age; }
+
+    public boolean getMarried() { return married; }
+
+    public void setMarried(boolean maried) { this.married = maried; }
+
 
 }

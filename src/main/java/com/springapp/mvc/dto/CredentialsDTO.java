@@ -1,9 +1,12 @@
 package com.springapp.mvc.dto;
 
+import com.springapp.mvc.model.enums.RoleType;
+
 public class CredentialsDTO {
 
     private String login;
     private String password;
+    private RoleType role;
 
     public CredentialsDTO() {
     }
@@ -22,5 +25,12 @@ public class CredentialsDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public String getRole() {
+        return role.toString();
+    }
+
+    public void setRole(RoleType role) {
+        this.role = role;
     }
 }

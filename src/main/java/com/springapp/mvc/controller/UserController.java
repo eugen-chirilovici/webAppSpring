@@ -29,6 +29,8 @@ public class UserController {
 
     private User loggedUser;
 
+
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
         model.addAttribute("message", "Hi there! Please, log in if you want to access our page");
@@ -39,6 +41,8 @@ public class UserController {
     public String submit(@ModelAttribute("credentials") CredentialsDTO credentials) {
 
         Credentials userCredentials = authenticationService.confirmAuthentication(credentials);
+        if(userCredentials == null) return "index";
+
         loggedUser = userService.getUserByCredentials(userCredentials);
 
         if (loggedUser != null) {
@@ -48,12 +52,18 @@ public class UserController {
                 return "redirect:/personal";
             }
         }
+
         return "redirect:/error";
     }
 
     @RequestMapping(value = "/allusers", method = RequestMethod.GET)
     public String showAllUsers(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
+
+        try {
+            model.addAttribute("users", userService.getAllUsers());
+        }catch (Exception | Error e){
+            return "index";
+        }
         model.addAttribute("title", "Admin Panel");
         model.addAttribute("message", "Here are all our users:");
         return "welcome";
@@ -64,6 +74,12 @@ public class UserController {
         List<UserDTO> listOfUsers = new ArrayList<>();
         listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
 
+        CredentialsDTO credentials = authenticationService.getCredentialsById(loggedUser.getCredentialsId());
+        if (credentials == null)return "index";
+
+        String role = credentials.getRole();
+
+        model.addAttribute("role",role.equals("ROLE_ADMIN")? "1":"2");
         model.addAttribute("users", listOfUsers);
         model.addAttribute("title", "Personal Cabinet");
         model.addAttribute("message", "Personal data:");
@@ -75,4 +91,33 @@ public class UserController {
         model.addAttribute("errorMessage", "Invalid Details");
         return "error";
     }
+
+    @RequestMapping(value = "/moreInformation", method = RequestMethod.GET)
+    public String getMoreInfoPage(Model model){
+
+        List<UserDTO> listOfUsers = new ArrayList<>();
+        listOfUsers.add(userService.getUserById(loggedUser.getUserId()));
+
+        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("title", "User Panel");
+        model.addAttribute("message", "Here are all our users:");
+
+
+        return "moreInformation";
+    }
+
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    public String deleteUserById(int id){
+        try{
+            userService.deleteUserById(id);
+        }catch (IndexOutOfBoundsException |IllegalArgumentException e){
+            return "index";
+        }
+
+        return "personalCab";
+    }
+
+
+
+
 }

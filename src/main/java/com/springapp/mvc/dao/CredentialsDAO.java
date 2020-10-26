@@ -2,6 +2,7 @@ package com.springapp.mvc.dao;
 
 import com.springapp.mvc.dto.CredentialsDTO;
 import com.springapp.mvc.model.Credentials;
+import com.springapp.mvc.model.User;
 import com.springapp.mvc.model.enums.RoleType;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +20,9 @@ public class CredentialsDAO {
         listOfCredentials.add(new Credentials(id++, "echirilovici", "test", RoleType.ROLE_ADMIN));
         listOfCredentials.add(new Credentials(id++, "cnicuta", "test", RoleType.ROLE_USER));
         listOfCredentials.add(new Credentials(id++, "frosca", "test", RoleType.ROLE_USER));
+        listOfCredentials.add(new Credentials(id++,"dsprinceac","test",RoleType.ROLE_USER));
+        listOfCredentials.add(new Credentials(id++,"sprinceac","test",RoleType.ROLE_ADMIN));
+
     }
 
     public Long addCredential(Credentials credentials, RoleType roleType) {
@@ -32,6 +36,15 @@ public class CredentialsDAO {
                 .filter(t -> t.getLogin().equals(credentials.getLogin()) &&
                         t.getPassword().equals(credentials.getPassword()))
                 .collect(Collectors.toList());
+    }
+
+    public Credentials findCredentialsById(Long credentialsId) {
+        for (Credentials credentials : listOfCredentials) {
+            if (credentials.getId() == credentialsId) {
+                return credentials;
+            }
+        }
+        return null;
     }
 
 }

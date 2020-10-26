@@ -4,6 +4,9 @@ public class User {
     private Long userId;
     private String firstName;
     private String lastName;
+    private boolean married;
+    private int age;
+
     private Long credentialsId;
 
     public User(String firstName, String lastName, Long credentialsId) {
@@ -19,6 +22,16 @@ public class User {
         this.credentialsId = credentialsId;
     }
 
+
+
+    public User(Long userId, String firstName, String lastName, Long credentialsId, int age, boolean married) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.credentialsId = credentialsId;
+        this.age = age;
+        this.married = married;
+    }
     public Long getUserId() {
         return userId;
     }
@@ -49,5 +62,21 @@ public class User {
 
     public void setCredentialsId(Long credentialsId) {
         this.credentialsId = credentialsId;
+    }
+
+    public boolean getMarried() {
+        return married;
+    }
+
+    public void setMarried(boolean married) {
+        this.married = married;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

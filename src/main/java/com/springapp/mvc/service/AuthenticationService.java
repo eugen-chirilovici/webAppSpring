@@ -3,6 +3,7 @@ package com.springapp.mvc.service;
 import com.springapp.mvc.dao.CredentialsDAO;
 import com.springapp.mvc.dto.CredentialsDTO;
 import com.springapp.mvc.model.Credentials;
+import com.springapp.mvc.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,10 @@ public class AuthenticationService {
         }
         return null;
     }
-
+    public CredentialsDTO getCredentialsById(Long credentialsId){
+        return Converter.convertFromCredentialsToCredentialsDTO
+                .apply(credentialsDAO.findCredentialsById(credentialsId));
+    }
     public CredentialsDAO getCredentialsDAO() {
         return credentialsDAO;
     }
