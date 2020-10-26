@@ -26,7 +26,7 @@
         </form:form>
     </c:when>
     <c:otherwise>
-        <a href="/moreInformation">More information</a>
+        <a href="${pageContext.request.contextPath}/moreInformation">More information</a>
         <br />
     </c:otherwise>
 </c:choose>
